@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.2
+
+- Der Startbildschirm zeigt keinen Scrollbalken mehr und wird in niedrigen Fenstern kompakter
+- Unter Windows brechen Knopftexte auf dem Startbildschirm nicht mehr um
+- Schmale Scrollbalken im Klecks-Stil, passend zum hellen und dunklen Design
+- Auf dem Startbildschirm steht die Bildmarke frei und etwas größer
+
 ## 1.0.1
 
 - Klecks heißt in der Oberfläche jetzt durchgehend „Malprogramm“ statt „Paint“: auf dem Startbildschirm, im Über-Dialog und in den Werkzeughinweisen
