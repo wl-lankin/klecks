@@ -113,7 +113,35 @@ bindUi({
   toggleFrame,
   checkUpdates: () => void checkUpdates(),
   about: () => void aboutDialog(),
+  snip: () => void startSnip(),
 });
+
+// ---------- screen snipping ----------
+
+async function startSnip() {
+  if (!isTauri) return toast("Bildschirmausschnitte gibt es nur in der installierten App");
+  const { invoke } = await import("@tauri-apps/api/core");
+  await invoke("snip_start");
+}
+
+async function initSnip() {
+  if (!isTauri) return;
+  const { invoke } = await import("@tauri-apps/api/core");
+  const { listen } = await import("@tauri-apps/api/event");
+  await listen("snip-ready", async () => {
+    try {
+      const png = await invoke<ArrayBuffer>("take_snip");
+      const c = await canvasFromBlob(new Blob([png], { type: "image/png" }));
+      const t = new Date();
+      const name = `Ausschnitt ${t.getHours().toString().padStart(2, "0")}.${t.getMinutes().toString().padStart(2, "0")}`;
+      createDoc(c, name);
+      setTool("select");
+      toast(`Ausschnitt ${c.width} × ${c.height} geöffnet`, { icon: "SquareDashedMousePointer", tone: "ok" });
+    } catch (e) {
+      toast(`Ausschnitt konnte nicht geöffnet werden: ${e}`, { tone: "err" });
+    }
+  });
+}
 
 // ---------- paste: only ever on an explicit paste ----------
 
@@ -325,6 +353,7 @@ async function initClose() {
 void initUpdates();
 void initClose();
 void initMenu();
+void initSnip();
 emit("docs", "tool", "settings");
 setTool("select");
 requestRender();

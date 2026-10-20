@@ -5,7 +5,7 @@ import { TOOLS, COMMANDS, runCommand, swapColors, keyLabel, openFiles } from "..
 import { begin, blankDoc, commit, closeDoc, copyImage, fitView, mutate, redo, saveDoc, switchTo, undo, zoomAt, zoomStep } from "../docs";
 import { setTool } from "../tools";
 import { FRAME_PRESETS, composite, requestRender } from "../render";
-import { MOD, WEBSITE, isMac, isTauri, isWindows, openUrl } from "../io";
+import { MOD, isMac, isTauri, isWindows } from "../io";
 import { h, icon, clear, kbd } from "./dom";
 import { colorPanel, closePopover, popover, slider } from "./controls";
 
@@ -436,9 +436,9 @@ function buildEmpty(newDialog: (preset?: [number, number]) => void) {
         { class: "empty-actions" },
         h("button", { class: "ghost", onclick: () => void openFiles() }, icon("FolderOpen", 17), "Bild öffnen", h("span", { class: "kbds" }, k(MOD), k("O"))),
         h("button", { class: "ghost", onclick: () => runCommand("paste") }, icon("ClipboardPaste", 17), "Aus der Zwischenablage einfügen", h("span", { class: "kbds" }, k(MOD), k("V"))),
+        h("button", { class: "ghost wide", onclick: () => runCommand("snip") }, icon("SquareDashedMousePointer", 17), "Bildschirmausschnitt aufnehmen", h("span", { class: "kbds" }, ...(isMac ? [k("⌃"), k("⇧"), k("⌘"), k("K")] : [k("Win"), k("Shift"), k("K")]))),
       ),
       h("div", { class: "empty-foot" }, "Bilder lassen sich auch einfach hierher ziehen", h("span", { class: "dim" }, "·"), "Alle Befehle:", h("span", { class: "kbds" }, k(MOD), k("K"))),
-      h("div", { class: "empty-credit" }, "Klecks von", h("button", { class: "link", onclick: () => void openUrl(WEBSITE) }, "Wolfgang Linz")),
     ),
   );
 }

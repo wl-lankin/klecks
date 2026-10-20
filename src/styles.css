@@ -1177,6 +1177,10 @@ kbd {
   color: var(--fg);
 }
 
+.ghost.wide {
+  grid-column: 1 / -1;
+}
+
 .empty-foot {
   margin-top: 26px;
   display: flex;

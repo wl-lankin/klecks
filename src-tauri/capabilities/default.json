@@ -3,7 +3,8 @@
   "identifier": "default",
   "description": "Window chrome, dialogs and Klecks' own file, clipboard and update commands.",
   "windows": [
-    "main"
+    "main",
+    "snip"
   ],
   "permissions": [
     "core:default",

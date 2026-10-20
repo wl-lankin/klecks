@@ -1,3 +1,4 @@
+mod snip;
 mod updates;
 
 use std::borrow::Cow;
@@ -103,6 +104,7 @@ fn mac_menu(app: &tauri::App) -> tauri::Result<()> {
             &item("new", "Neue Leinwand …", Some("CmdOrCtrl+N"))?,
             &item("open", "Bild öffnen …", Some("CmdOrCtrl+O"))?,
             &item("pasteNew", "Als neues Bild einfügen", Some("CmdOrCtrl+Shift+V"))?,
+            &item("snip", "Bildschirmausschnitt aufnehmen", Some("Ctrl+Shift+Cmd+K"))?,
             &sep()?,
             &item("save", "Speichern", Some("CmdOrCtrl+S"))?,
             &item("saveAs", "Speichern unter …", Some("CmdOrCtrl+Shift+S"))?,
@@ -176,6 +178,26 @@ fn mac_menu(app: &tauri::App) -> tauri::Result<()> {
     Ok(())
 }
 
+/// ⌃⇧⌘K on macOS (next to the system's ⌃⇧⌘3/4), Win+Shift+K on Windows (Win+Shift+S is taken).
+fn register_snip_shortcut(app: &tauri::App) {
+    use tauri_plugin_global_shortcut::{Code, GlobalShortcutExt, Modifiers, Shortcut, ShortcutState};
+    let mods = if cfg!(target_os = "macos") { Modifiers::SUPER | Modifiers::CONTROL | Modifiers::SHIFT } else { Modifiers::SUPER | Modifiers::SHIFT };
+    let shortcut = Shortcut::new(Some(mods), Code::KeyK);
+    let plugin = tauri_plugin_global_shortcut::Builder::new()
+        .with_handler(|app, _shortcut, event| {
+            if event.state() == ShortcutState::Pressed {
+                snip::start(app);
+            }
+        })
+        .build();
+    if let Err(e) = app.handle().plugin(plugin) {
+        return eprintln!("[klecks] Tastenkürzel-Plugin fehlgeschlagen: {e}");
+    }
+    if let Err(e) = app.global_shortcut().register(shortcut) {
+        eprintln!("[klecks] Tastenkürzel für Ausschnitt nicht verfügbar: {e}");
+    }
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -183,9 +205,11 @@ pub fn run() {
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_opener::init())
         .manage(updates::Updates::default())
+        .manage(snip::Snip::default())
         .setup(|app| {
             #[cfg(target_os = "macos")]
             mac_menu(app)?;
+            register_snip_shortcut(app);
             if !cfg!(debug_assertions) {
                 updates::spawn(app.handle().clone());
             }
@@ -197,6 +221,12 @@ pub fn run() {
             copy_image,
             paste_image,
             clipboard_image_size,
+            snip::snip_start,
+            snip::snip_shot,
+            snip::snip_show,
+            snip::snip_cancel,
+            snip::snip_finish,
+            snip::take_snip,
             updates::update_check,
             updates::update_status,
             updates::update_restart,

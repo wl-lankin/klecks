@@ -51,6 +51,7 @@ let ui: {
   toggleFrame: () => void;
   checkUpdates: () => void;
   about: () => void;
+  snip: () => void;
 } = null!;
 
 export function bindUi(u: typeof ui) {
@@ -65,6 +66,7 @@ export const COMMANDS: Command[] = [
   // Datei
   { id: "new", title: "Neue Leinwand …", group: "Datei", keys: ["mod+n"], icon: "FilePlus2", run: () => ui.newDialog() },
   { id: "open", title: "Bild öffnen …", group: "Datei", keys: ["mod+o"], icon: "FolderOpen", run: () => void openFiles() },
+  { id: "snip", title: "Bildschirmausschnitt aufnehmen", group: "Datei", keys: [isMac ? "mod+ctrl+shift+keyk" : "meta+shift+keyk"], icon: "SquareDashedMousePointer", run: () => ui.snip() },
   { id: "pasteNew", title: "Als neues Bild einfügen", group: "Datei", keys: ["mod+shift+v"], icon: "ClipboardPaste", run: () => pasteFromSystem(true) },
   { id: "save", title: "Speichern", group: "Datei", keys: ["mod+s"], icon: "Save", run: () => void D.saveDoc(), when: hasDoc },
   { id: "saveAs", title: "Speichern unter …", group: "Datei", keys: ["mod+shift+s"], icon: "Download", run: () => void D.saveDoc(S.doc, false), when: hasDoc },
