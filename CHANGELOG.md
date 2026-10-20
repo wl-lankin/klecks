@@ -2,9 +2,9 @@
 
 ## 1.0.0
 
-Die erste Version von Klecks, dem modernen Paint für Mac und Windows.
+Die erste Version von Klecks, dem modernen Malprogramm für Mac und Windows.
 
-- Malen wie im klassischen Paint: Pinsel (rund, Kalligrafie, Airbrush, Sprühdose) mit Stiftdruck, Pixelstift, Radierer, Fülleimer mit Toleranz, Pipette, zwei Farben mit Rechtsklick
+- Malen wie in klassischen Malprogrammen: Pinsel (rund, Kalligrafie, Airbrush, Sprühdose) mit Stiftdruck, Pixelstift, Radierer, Fülleimer mit Toleranz, Pipette, zwei Farben mit Rechtsklick
 - Formen und Linien bleiben bearbeitbar: Rechteck, Ellipse, Dreiecke, Stern, Herz, Sprechblase und mehr, jeweils mit Füllung, Strichart und Schatten
 - Text in vier Schriften, frei, auf Etikett oder mit Kontur
 - Rechteck- und Lassoauswahl: herausheben, kopieren, zuschneiden, Farben umkehren; ⌘A bzw. Strg+A wählt das ganze Bild
