@@ -7,6 +7,7 @@
 - Schmale Scrollbalken im Klecks-Stil, passend zum hellen und dunklen Design
 - Auf dem Startbildschirm steht die Bildmarke frei und etwas größer
 - Der Über-Dialog verlinkt nur noch auf den Entwickler
+- Alle Dialoge haben oben rechts ein X zum Schließen
 
 ## 1.0.1
 

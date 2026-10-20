@@ -1,4 +1,4 @@
-import { h } from "./dom";
+import { h, icon } from "./dom";
 
 let root: HTMLElement;
 let openCount = 0;
@@ -18,9 +18,10 @@ export interface ModalHandle {
 }
 
 /** A centered card. Escape or a click on the backdrop closes it (calls onClose). */
-export function modal(title: string, body: Node, opts: { onClose?: () => void; width?: number; footer?: Node } = {}): ModalHandle {
+export function modal(title: string, body: Node, opts: { onClose?: () => void; width?: number; footer?: Node; closeButton?: boolean } = {}): ModalHandle {
   openCount++;
-  const card = h("div", { class: "modal", style: { width: `${opts.width ?? 440}px` } }, h("div", { class: "modal-title" }, title), body, opts.footer ?? null);
+  const x = opts.closeButton === false ? null : h("button", { class: "modal-x", title: "Schließen (Esc)", "aria-label": "Schließen", onclick: () => close() }, icon("X", 16, 2));
+  const card = h("div", { class: "modal", style: { width: `${opts.width ?? 440}px` } }, x, h("div", { class: "modal-title" }, title), body, opts.footer ?? null);
   const back = h("div", { class: "modal-back" }, card);
   let closed = false;
   const close = () => {

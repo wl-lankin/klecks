@@ -97,6 +97,7 @@ export function openPalette() {
   });
   const m = modal("", h("div", { class: "palette" }, h("div", { class: "pal-head" }, icon("Search", 17), input), list), {
     width: 560,
+    closeButton: false,
     onClose: () => (paletteOpen = false),
   });
   m.el.classList.add("pal-modal");

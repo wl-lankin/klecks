@@ -1616,6 +1616,32 @@ kbd {
   transform: none;
 }
 
+.modal {
+  position: relative;
+}
+
+.modal-x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  color: var(--fg-faint);
+  transition: background 0.12s, color 0.12s;
+}
+
+.modal-x:hover {
+  background: var(--hover);
+  color: var(--fg);
+}
+
+.modal-title {
+  padding-right: 36px;
+}
+
 .modal-title {
   font-size: 16px;
   font-weight: 700;
