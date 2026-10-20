@@ -993,7 +993,7 @@ kbd {
   display: none;
   place-items: center;
   z-index: 8;
-  overflow: auto;
+  overflow: hidden;
   padding: 24px;
 }
 
@@ -1160,6 +1160,9 @@ kbd {
   align-items: center;
   gap: 10px;
   height: 46px;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
   padding: 0 14px;
   border-radius: 13px;
   background: var(--hover);
@@ -1981,4 +1984,77 @@ kbd {
   gap: 5px;
   color: var(--fg-faint);
   font-size: 12px;
+}
+
+/* The start screen never scrolls; on short windows it gets more compact instead. */
+@media (max-height: 820px) {
+  .empty-logo {
+    margin-bottom: 6px;
+  }
+  .empty-logo svg {
+    width: 64px;
+    height: 64px;
+  }
+  .empty h1 {
+    font-size: 26px;
+  }
+  .empty .lead {
+    margin-bottom: 18px;
+  }
+  .empty-foot {
+    margin-top: 16px;
+  }
+}
+
+@media (max-height: 700px) {
+  .empty-logo,
+  .empty .lead,
+  .empty-credit {
+    display: none;
+  }
+  .pv-box {
+    height: 40px;
+  }
+  .preset em {
+    display: none;
+  }
+}
+
+@media (max-height: 580px) {
+  .empty-foot,
+  .empty-label {
+    display: none;
+  }
+}
+
+/* ---------- scrollbars ---------- */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--press);
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  min-height: 32px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--fg-faint);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--accent);
+}
+
+::-webkit-scrollbar-button {
+  display: none;
 }
