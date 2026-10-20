@@ -6,6 +6,7 @@
 - Unter Windows brechen Knopftexte auf dem Startbildschirm nicht mehr um
 - Schmale Scrollbalken im Klecks-Stil, passend zum hellen und dunklen Design
 - Auf dem Startbildschirm steht die Bildmarke frei und etwas größer
+- Der Über-Dialog verlinkt nur noch auf den Entwickler
 
 ## 1.0.1
 
