@@ -1,0 +1,70 @@
+<!doctype html>
+<!-- The picture the landing demo opens: a made-up account page, rendered to screen.png at 1200 × 760. -->
+<html lang="de"><head><meta charset="utf-8">
+<style>
+@font-face { font-family: G; font-weight: 400; src: url(../../../Wolfgang%20Linz/fonts/geist-normal-latin.woff2); }
+@font-face { font-family: G; font-weight: 500 700; src: url(../../../Wolfgang%20Linz/fonts/geist-normal-latin.woff2); }
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1200px; height: 760px; overflow: hidden; }
+body { font: 400 14px/1.5 G, -apple-system, sans-serif; color: #1d2230; background: #f5f6fa; display: grid; grid-template-columns: 228px 1fr; }
+aside { background: #fff; border-right: 1px solid #e7e9f0; padding: 22px 14px; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; padding: 0 10px 26px; }
+.logo i { width: 26px; height: 26px; border-radius: 8px; background: linear-gradient(135deg, #38bdf8, #6366f1); }
+nav a { display: flex; align-items: center; gap: 11px; padding: 9px 12px; border-radius: 9px; color: #5a6275; font-weight: 500; text-decoration: none; margin-bottom: 2px; }
+nav a b { width: 16px; height: 16px; border-radius: 5px; border: 2px solid currentColor; opacity: .7; }
+nav a.on { background: #eef0ff; color: #4f46e5; }
+nav .sep { height: 1px; background: #eceef4; margin: 14px 8px; }
+main { padding: 0 40px; }
+header { height: 66px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e7e9f0; margin: 0 -40px 30px; padding: 0 40px; background: #fff; }
+.search { width: 340px; height: 36px; border-radius: 9px; background: #f2f3f7; color: #9aa1b2; display: flex; align-items: center; padding: 0 14px; }
+.me { display: flex; align-items: center; gap: 10px; color: #5a6275; }
+.av { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #f9a8d4, #c084fc); }
+h1 { margin: 0; font-size: 26px; letter-spacing: -.02em; }
+.sub { margin: 4px 0 24px; color: #6b7285; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.card { background: #fff; border: 1px solid #e7e9f0; border-radius: 14px; padding: 20px 22px; }
+.card h2 { margin: 0 0 4px; font-size: 15.5px; }
+.card p { margin: 0; color: #6b7285; font-size: 13.5px; }
+.who { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+.who .av { width: 46px; height: 46px; }
+.who b { display: block; font-size: 15px; }
+.who span { color: #5a6275; }
+.row { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
+.tog { width: 44px; height: 26px; border-radius: 99px; background: #d7dae3; position: relative; }
+.tog::after { content: ''; position: absolute; left: 3px; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+.btn { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 9px; font-weight: 600; font-size: 13.5px; }
+.pri { background: #4f46e5; color: #fff; }
+.sec { background: #f2f3f7; color: #1d2230; border: 1px solid #e2e5ee; }
+.key { margin-top: 14px; height: 38px; display: flex; align-items: center; padding: 0 12px; border-radius: 9px; background: #f5f6fa; border: 1px solid #e7e9f0; font: 500 13px ui-monospace, Menlo, monospace; color: #3b4255; }
+.wide { grid-column: 1 / -1; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+td { padding: 11px 0; border-top: 1px solid #f0f1f5; color: #3b4255; }
+td:last-child { text-align: right; color: #6b7285; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22c55e; margin-right: 8px; }
+</style></head><body>
+<aside>
+  <div class="logo"><i></i>Lumora</div>
+  <nav>
+    <a><b></b>Übersicht</a><a><b></b>Dateien</a><a><b></b>Freigaben</a><a><b></b>Papierkorb</a>
+    <div class="sep"></div>
+    <a><b></b>Konto</a><a class="on"><b></b>Sicherheit</a><a><b></b>Benachrichtigungen</a><a><b></b>Abrechnung</a>
+  </nav>
+</aside>
+<main>
+  <header><div class="search">Dateien und Einstellungen durchsuchen</div><div class="me">Mara<span class="av"></span></div></header>
+  <h1>Sicherheit</h1>
+  <p class="sub">Schütze dein Konto und behalte im Blick, wo du angemeldet bist.</p>
+  <div class="grid">
+    <div class="card"><h2>Angemeldet als</h2><p>Mit dieser Adresse meldest du dich an.</p>
+      <div class="who"><span class="av"></span><div><b>Mara Lindqvist</b><span>mara.lindqvist@example.com</span></div></div></div>
+    <div class="card"><h2>Zwei-Faktor-Anmeldung</h2><p>Zusätzlich zum Passwort ein Code aus deiner Authenticator-App.</p>
+      <div class="row"><span class="tog"></span><span class="btn pri">Einrichten</span></div></div>
+    <div class="card"><h2>API-Schlüssel</h2><p>Für Skripte und Integrationen. Behandle ihn wie ein Passwort.</p>
+      <div class="key">lmr_live_8f2c41d9a07be35c6e1f</div></div>
+    <div class="card"><h2>Passwort</h2><p>Zuletzt geändert vor 14 Monaten.</p>
+      <div class="row"><span style="color:#b45309;font-weight:500">Ein neues Passwort wird empfohlen</span><span class="btn sec">Ändern</span></div></div>
+    <div class="card wide"><h2>Aktive Sitzungen</h2>
+      <table><tr><td><span class="dot"></span>MacBook Pro · Safari · München</td><td>Diese Sitzung</td></tr><tr><td><span class="dot" style="background:#cbd0db"></span>iPhone 15 · Lumora-App · München</td><td>vor 2 Stunden</td></tr></table></div>
+  </div>
+</main>
+</body></html>
