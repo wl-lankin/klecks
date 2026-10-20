@@ -69,6 +69,20 @@ if (demo === "hero") {
   doc.version++;
   fitView(doc);
   emit("docs", "history", "frame");
+} else if (demo === "photo") {
+  const blob = await (await fetch("demo/photo.jpg")).blob();
+  createDoc(await canvasFromBlob(blob), "Bucht.jpg");
+  const red = "#FF3B30";
+  const objs: Obj[] = [
+    { id: uid(), type: "text", x: 250, y: 150, text: "Hier baden wir morgen!", size: 104, font: "hand", color: red, bg: "pill", shadow: true },
+    { id: uid(), type: "line", x1: 1180, y1: 330, x2: 1600, y2: 640, cx: 1560, cy: 320, color: red, width: 20, dash: "solid", arrow: "taper", shadow: true },
+    { id: uid(), type: "ellipse", x: 1520, y: 640, w: 330, h: 190, color: red, width: 12, dash: "solid", fill: "none", fillColor: red, radius: 0, kind: "triangle", shadow: true },
+  ];
+  const doc = S.doc!;
+  doc.objects.push(...objs);
+  doc.frame = { ...doc.frame, on: true, preset: 0 };
+  doc.version++;
+  fitView(doc);
 } else if (demo === "paint") {
   blankDoc(1600, 1000, "#ffffff", "Skizze");
   setTool("brush");
