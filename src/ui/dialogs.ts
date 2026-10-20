@@ -346,7 +346,5 @@ export async function aboutDialog() {
       h("span", { class: "dim" }, "Entwickelt von"),
       h("button", { class: "link", onclick: () => void openUrl(WEBSITE) }, "Wolfgang Linz"),
     ),
-    h("button", { class: "link small", onclick: () => void openUrl(WEBSITE) }, icon("Globe", 13), "wolfgang-linz.de"),
-    h("button", { class: "link small dim", onclick: () => void openUrl("https://github.com/wl-lankin/klecks") }, icon("Code", 13), "Quellcode auf GitHub"),
   ), { width: 360 }).el.classList.add("about-modal");
 }
