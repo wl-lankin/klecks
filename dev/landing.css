@@ -1,0 +1,13 @@
+/* Only for the website demo: the window buttons the system would draw on a Mac. */
+.landing .topbar.mac::before {
+  content: "";
+  flex: none;
+  width: 66px;
+  height: 12px;
+  margin-left: 10px;
+  background:
+    radial-gradient(circle 6px at 6px 6px, #ff5f57 98%, transparent),
+    radial-gradient(circle 6px at 26px 6px, #febc2e 98%, transparent),
+    radial-gradient(circle 6px at 46px 6px, #28c840 98%, transparent);
+  background-repeat: no-repeat;
+}
