@@ -66,6 +66,13 @@ fn paste_image() -> Result<Response, String> {
 
 /// The full native menu bar. Every Klecks item emits a "menu" event with the command id, so a key
 /// equivalent caught by the menu ends up in the same command as a key press in the webview.
+/// Only the size, for presetting a new canvas when the user opens that dialog.
+#[tauri::command]
+async fn clipboard_image_size() -> Option<(u32, u32)> {
+    let img = arboard::Clipboard::new().ok()?.get_image().ok()?;
+    Some((img.width as u32, img.height as u32))
+}
+
 #[cfg(target_os = "macos")]
 fn mac_menu(app: &tauri::App) -> tauri::Result<()> {
     use tauri::menu::{IsMenuItem, Menu, MenuItem, PredefinedMenuItem, Submenu};
@@ -189,6 +196,7 @@ pub fn run() {
             write_file,
             copy_image,
             paste_image,
+            clipboard_image_size,
             updates::update_check,
             updates::update_status,
             updates::update_restart,

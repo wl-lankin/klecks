@@ -5,7 +5,7 @@ import { h, icon, kbd, clear } from "./dom";
 import { modal } from "./modal";
 import { popover, closePopover } from "./controls";
 import { logo } from "./chrome";
-import { WEBSITE, openUrl } from "../io";
+import { WEBSITE, clipboardImageSize, openUrl } from "../io";
 
 const firstKey = (c: Command) => (c.keys?.[0] ? kbd(...keyLabel(c.keys[0])) : null);
 
@@ -168,8 +168,8 @@ export function newDialog(preset?: [number, number]) {
   let w = preset?.[0] ?? 1920;
   let hh = preset?.[1] ?? 1080;
   let bg: string | null = "#FFFFFF";
-  const wIn = num(w, (v) => (w = v));
-  const hIn = num(hh, (v) => (hh = v));
+  const wIn = num(w, (v) => ((w = v), (touched = true)));
+  const hIn = num(hh, (v) => ((hh = v), (touched = true)));
   const presets: [string, number, number][] = [
     ["Full HD", 1920, 1080],
     ["HD", 1280, 720],
@@ -179,9 +179,31 @@ export function newDialog(preset?: [number, number]) {
     ["A4 (300 dpi)", 2480, 3508],
     ["Icon", 512, 512],
   ];
-  const chips = h("div", { class: "chips" }, presets.map(([n, pw, ph]) =>
-    h("button", { class: "chip", onclick: () => { w = pw; hh = ph; wIn.value = String(pw); hIn.value = String(ph); } }, h("b", {}, n), h("small", {}, `${pw}×${ph}`)),
-  ));
+  const pick = (b: HTMLElement, pw: number, ph: number) => {
+    w = pw;
+    hh = ph;
+    wIn.value = String(pw);
+    hIn.value = String(ph);
+    chips.querySelectorAll(".chip").forEach((x) => x.classList.remove("on"));
+    b.classList.add("on");
+  };
+  const chip = (n: string, pw: number, ph: number, ico?: string) => {
+    const b: HTMLButtonElement = h("button", { class: "chip", onclick: () => ((touched = true), pick(b, pw, ph)) }, ico ? icon(ico, 14) : null, h("b", {}, n), h("small", {}, `${pw}×${ph}`));
+    return b;
+  };
+  const chips = h("div", { class: "chips" }, presets.map(([n, pw, ph]) => chip(n, pw, ph)));
+  let touched = false;
+  if (!preset) {
+    void clipboardImageSize().then((size) => {
+      if (!size || !size[0] || !size[1]) return;
+      const b = chip("Zwischenablage", size[0], size[1], "ClipboardPaste");
+      chips.prepend(b);
+      if (!touched) {
+        pick(b, size[0], size[1]);
+        wIn.select();
+      }
+    });
+  }
   const bgs: [string, string | null][] = [["Weiß", "#FFFFFF"], ["Schwarz", "#111114"], ["Transparent", null], ["Farbe 2", settings.secondary]];
   const bgRow = h("div", { class: "chips" }, bgs.map(([n, c], i) => {
     const b: HTMLButtonElement = h("button", {

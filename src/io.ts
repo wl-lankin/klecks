@@ -125,6 +125,15 @@ export async function copyCanvas(canvas: HTMLCanvasElement) {
   await navigator.clipboard.write([new ClipboardItem({ "image/png": new Blob([png as BlobPart], { type: "image/png" }) })]);
 }
 
+export async function clipboardImageSize(): Promise<[number, number] | null> {
+  if (!isTauri) return null;
+  try {
+    return await invoke<[number, number] | null>("clipboard_image_size");
+  } catch {
+    return null;
+  }
+}
+
 /** Reads an image only when the user pasted on purpose. */
 export async function readClipboardImage(): Promise<HTMLCanvasElement | null> {
   if (isTauri) {
