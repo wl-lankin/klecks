@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#231C3D"/>
+      <stop offset="1" stop-color="#0C0A14"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".22"/>
+      <stop offset=".5" stop-color="#ffffff" stop-opacity=".04"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".10"/>
+    </linearGradient>
+    <linearGradient id="blob" x1="0.1" y1="0.1" x2="0.9" y2="0.95">
+      <stop offset="0" stop-color="#FF8A4C"/>
+      <stop offset=".45" stop-color="#FF3D7F"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".42" cy=".6" r=".5">
+      <stop offset="0" stop-color="#FF4D8D" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#FF4D8D" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#1a0630" flood-opacity=".55"/>
+    </filter>
+    <clipPath id="sq"><rect x="100" y="100" width="824" height="824" rx="186"/></clipPath>
+  </defs>
+  <rect x="100" y="100" width="824" height="824" rx="186" fill="url(#bg)"/>
+  <g clip-path="url(#sq)">
+    <circle cx="440" cy="610" r="420" fill="url(#glow)"/>
+    <g fill="url(#blob)">
+      <path d="M250 560 C240 450 340 380 440 395 C520 405 560 440 610 470 C680 510 690 600 650 670 C615 735 640 790 570 815 C490 845 420 790 360 790 C290 790 240 740 250 660 C255 620 255 600 250 560 Z"/>
+      <circle cx="706" cy="768" r="30"/>
+      <circle cx="238" cy="430" r="19"/>
+      <circle cx="300" cy="850" r="15"/>
+    </g>
+    <ellipse cx="335" cy="482" rx="58" ry="24" transform="rotate(-38 335 482)" fill="#fff" opacity=".28"/>
+    <path filter="url(#shadow)" fill="#fff" stroke="#fff" stroke-width="8" stroke-linejoin="round"
+      d="M422.2 602.2 L640 352 L586.3 323.7 L770 270 L716.3 453.7 L688 400 L437.8 617.8 A11 11 0 0 1 422.2 602.2 Z"/>
+  </g>
+  <rect x="101.5" y="101.5" width="821" height="821" rx="184.5" fill="none" stroke="url(#rim)" stroke-width="3"/>
+</svg>

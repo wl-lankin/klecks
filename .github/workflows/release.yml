@@ -1,0 +1,131 @@
+# Builds Klecks for macOS (universal: Apple Silicon + Intel) and Windows, signs the updater artifacts
+# and attaches installers, .sig files and latest.json to a DRAFT GitHub release. Installed apps see
+# the update once the draft is published. Trigger: push a tag like v0.1.0 (see docs/RELEASE.md).
+#
+# Every installer is attached twice: with the version in the name (tauri-action) and under a stable
+# name (Klecks-macOS.dmg, Klecks-Windows-Setup.exe), so the website can always link to
+# releases/latest/download/<stable name>.
+#
+# createUpdaterArtifacts lives in src-tauri/tauri.updater.conf.json and is only passed here, because
+# it makes `tauri build` demand the signing key and local builds have none.
+# The Windows job waits for the macOS job: both write the same latest.json, and parallel uploads race.
+
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+env:
+  TAG: ${{ github.ref_name }}
+
+jobs:
+  macos:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-darwin,x86_64-apple-darwin
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - run: npm ci
+
+      - name: Release notes
+        id: notes
+        shell: bash
+        run: |
+          {
+            echo 'body<<NOTES_EOF'
+            bash .github/release-notes.sh "$TAG"
+            echo 'NOTES_EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - uses: tauri-apps/tauri-action@v0.6.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          tauriScript: npx tauri
+          tagName: ${{ env.TAG }}
+          releaseName: "Klecks ${{ env.TAG }}"
+          releaseBody: ${{ steps.notes.outputs.body }}
+          releaseDraft: true
+          prerelease: ${{ contains(env.TAG, '-') }}
+          uploadUpdaterJson: true
+          args: --target universal-apple-darwin --bundles app,dmg --config src-tauri/tauri.updater.conf.json
+
+      - name: Stable download name (macOS)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          dmg=$(ls src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg | head -1)
+          cp "$dmg" Klecks-macOS.dmg
+          gh release upload "$TAG" Klecks-macOS.dmg --clobber
+
+  windows:
+    needs: macos
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - run: npm ci
+
+      - name: Release notes
+        id: notes
+        shell: bash
+        run: |
+          {
+            echo 'body<<NOTES_EOF'
+            bash .github/release-notes.sh "$TAG"
+            echo 'NOTES_EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - uses: tauri-apps/tauri-action@v0.6.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          tauriScript: npx tauri
+          tagName: ${{ env.TAG }}
+          releaseName: "Klecks ${{ env.TAG }}"
+          releaseBody: ${{ steps.notes.outputs.body }}
+          releaseDraft: true
+          prerelease: ${{ contains(env.TAG, '-') }}
+          uploadUpdaterJson: true
+          updaterJsonPreferNsis: true
+          args: --bundles nsis --config src-tauri/tauri.updater.conf.json
+
+      - name: Stable download name (Windows)
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          exe=$(ls src-tauri/target/release/bundle/nsis/*-setup.exe | head -1)
+          cp "$exe" Klecks-Windows-Setup.exe
+          gh release upload "$TAG" Klecks-Windows-Setup.exe --clobber

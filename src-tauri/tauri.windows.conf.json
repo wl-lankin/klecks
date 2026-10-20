@@ -1,0 +1,19 @@
+{
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Klecks",
+        "width": 1400,
+        "height": 900,
+        "minWidth": 960,
+        "minHeight": 620,
+        "center": true,
+        "dragDropEnabled": false,
+        "backgroundColor": "#0d0d11",
+        "decorations": false,
+        "shadow": true
+      }
+    ]
+  }
+}
