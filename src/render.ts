@@ -321,10 +321,32 @@ function renderView() {
     ctx.fillStyle = pat;
     ctx.fillRect(0, 0, doc.w, doc.h);
   });
+  drawOutside(ctx, doc);
   ctx.restore();
 
   if (zoom >= 10) drawPixelGrid(ctx, doc, cw, ch);
   drawOverlays(ctx, doc);
+}
+
+/**
+ * Objects pushed past the canvas edge are cut off in the picture, like in Paint. In the view their
+ * outside part stays faintly visible, so they can be found and dragged back.
+ */
+function drawOutside(ctx: CanvasRenderingContext2D, doc: Doc) {
+  const out = doc.objects.filter((o) => {
+    if (o.type === "blur" || o.type === "spotlight" || o.id === S.editingText) return false;
+    const b = bounds(o);
+    return b.x < 0 || b.y < 0 || b.x + b.w > doc.w || b.y + b.h > doc.h;
+  });
+  if (!out.length) return;
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(-1e6, -1e6, 2e6, 2e6);
+  ctx.rect(0, 0, doc.w, doc.h);
+  ctx.clip("evenodd");
+  ctx.globalAlpha = 0.4;
+  for (const o of out) drawObject(ctx, o);
+  ctx.restore();
 }
 
 function drawPixelGrid(ctx: CanvasRenderingContext2D, doc: Doc, cw: number, ch: number) {
