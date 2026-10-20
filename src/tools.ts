@@ -302,8 +302,8 @@ const LABELS: Record<string, string> = {
   shape: "Form",
   text: "Text",
   step: "Schritt",
-  stroke: "Markieren",
-  blur: "Unkenntlich",
+  stroke: "Textmarker",
+  blur: "Unkenntlich machen",
   spotlight: "Spotlight",
 };
 
@@ -967,7 +967,7 @@ export function initTools(c: HTMLCanvasElement, textarea: HTMLTextAreaElement) {
     if (S.tool === "crop") return applyCrop();
     const h = hitHandle(screenPt(e));
     if (h && h.id === "mid" && h.o.type === "line") {
-      mutate("Gerade", () => {
+      mutate("Begradigen", () => {
         delete (h.o as LineObj).cx;
         delete (h.o as LineObj).cy;
       });

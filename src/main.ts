@@ -286,7 +286,7 @@ window.addEventListener("drop", async (e) => {
   dragDepth = 0;
   drop.classList.remove("in");
   const files = Array.from(e.dataTransfer?.files ?? []).filter((f) => f.type.startsWith("image/") || /\.(png|jpe?g|webp|bmp|gif|avif|tiff?|heic)$/i.test(f.name));
-  if (!files.length) return toast("Das ist kein Bild, das Klecks öffnen kann", { tone: "err" });
+  if (!files.length) return toast("Diese Datei kann Klecks nicht als Bild öffnen", { tone: "err" });
   for (const f of files) {
     try {
       createDoc(await canvasFromBlob(f), f.name);

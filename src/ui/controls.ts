@@ -203,7 +203,7 @@ export function colorPanel(current: string, onPick: (c: string, final: boolean) 
     "div",
     { class: "color-panel" },
     h("div", { class: "cp-grid" }, PALETTE.flat().map(swatch)),
-    settings.recent.length ? h("div", { class: "cp-sub" }, "Zuletzt") : null,
+    settings.recent.length ? h("div", { class: "cp-sub" }, "Zuletzt verwendet") : null,
     settings.recent.length ? h("div", { class: "cp-row" }, settings.recent.map(swatch)) : null,
     h("div", { class: "cp-custom" }, h("label", { class: "native-wrap", title: "Eigene Farbe" }, native, icon("Pipette", 15)), hex),
   );

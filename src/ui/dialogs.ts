@@ -304,7 +304,7 @@ export function canvasDialog() {
   };
   const body = h("div", { class: "form" },
     h("div", { class: "row-anchor" }, h("div", {}, field("Breite", wIn, "px"), field("Höhe", hIn, "px")), h("div", {}, h("div", { class: "field-label" }, "Anker"), anchor)),
-    h("div", { class: "field-label" }, "Neue Fläche"),
+    h("div", { class: "field-label" }, "Farbe der neuen Fläche"),
     fillRow,
   );
   body.addEventListener("keydown", (e) => e.key === "Enter" && ok());
@@ -320,11 +320,11 @@ export function shortcutsDialog() {
   ),
   h("div", { class: "sc-group" }, h("div", { class: "menu-head" }, "Beim Zeichnen"),
     ...([
-      ["Winkel einrasten / Quadrat / Kreis", "Shift"],
+      ["Winkel einrasten, Quadrat oder Kreis zeichnen", "Shift"],
       ["Von der Mitte aus", "Alt"],
       ["Ansicht verschieben", "Leertaste"],
       ["Beim Verschieben duplizieren", "Alt"],
-      ["Werkzeug größer / kleiner", "+ / −"],
+      ["Werkzeug größer oder kleiner", "+ / −"],
       ["Mit Farbe 2 malen", "Rechtsklick"],
     ] as const).map(([t, k]) => h("div", { class: "sc-row" }, h("span", {}, t), kbd(k))),
   ));
@@ -341,7 +341,7 @@ export async function aboutDialog() {
     logo(96),
     h("h2", {}, "Klecks"),
     h("div", { class: "dim" }, `Version ${version}`),
-    h("p", {}, "Modernes Paint und Screenshot-Markierung für Mac und Windows."),
+    h("p", {}, "Ein modernes Paint für Mac und Windows, mit Extras für die schnelle Weitergabe."),
     h("div", { class: "creator" },
       h("span", { class: "dim" }, "Entwickelt von"),
       h("button", { class: "link", onclick: () => void openUrl(WEBSITE) }, "Wolfgang Linz"),

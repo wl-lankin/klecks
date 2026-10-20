@@ -574,7 +574,7 @@ export function flatten() {
 export function transformSelectedImage(op: "flipH" | "flipV" | "cw" | "ccw") {
   const imgs = S.doc?.objects.filter((o): o is ImageObj => o.type === "image" && S.selection.includes(o.id)) ?? [];
   if (!imgs.length) return;
-  mutate("Objekt drehen", () => {
+  mutate("Bild drehen oder spiegeln", () => {
     for (const o of imgs) {
       if (op === "flipH") o.flipX = !o.flipX;
       else if (op === "flipV") o.flipY = !o.flipY;

@@ -260,7 +260,7 @@ function buildTopbar(menu: () => void) {
     h("div", { class: "tb-sep" }),
     frameBtn,
     h("button", { class: "ibtn with-text", "data-tip": "Als Datei speichern", "data-keys": keysOf("save"), onclick: () => void saveDoc() }, icon("Download", 17), h("span", {}, "Speichern")),
-    h("button", { class: "btn primary copy-btn", "data-tip": "Fertiges Bild in die Zwischenablage, direkt einfügbar in Chat, Mail oder Ticket", "data-keys": keysOf("copyImage"), onclick: () => void copyImage() }, icon("Copy", 16, 2.2), h("span", {}, "Kopieren")),
+    h("button", { class: "btn primary copy-btn", "data-tip": "Das fertige Bild in die Zwischenablage kopieren, zum Einfügen in Chat, Mail oder Ticket", "data-keys": keysOf("copyImage"), onclick: () => void copyImage() }, icon("Copy", 16, 2.2), h("span", {}, "Kopieren")),
   );
   const winControls = isWindows && isTauri
     ? h(
@@ -357,7 +357,7 @@ function pickColor(anchor: HTMLElement, second: boolean) {
 
 function buildBottom() {
   const info = h("div", { class: "pill info glass" });
-  const zoomLabel = h("button", { class: "zoom-val", "data-tip": "Klick: einpassen / 100 %" , onclick: () => (Math.abs((S.doc?.view.zoom ?? 1) - 1) < 0.001 ? fitView() : zoomAt(1)) });
+  const zoomLabel = h("button", { class: "zoom-val", "data-tip": "Zwischen Einpassen und 100 % wechseln" , onclick: () => (Math.abs((S.doc?.view.zoom ?? 1) - 1) < 0.001 ? fitView() : zoomAt(1)) });
   const zoom = h(
     "div",
     { class: "pill zoom glass" },
@@ -410,7 +410,7 @@ function buildEmpty(newDialog: (preset?: [number, number]) => void) {
       { class: "empty-card" },
       h("div", { class: "empty-logo" }, logo(84)),
       h("h1", {}, "Malen, zeichnen, gestalten."),
-      h("p", { class: "lead" }, "Ein modernes Paint für Mac und Windows. Und wenn ein Bild weiter soll, sind Pfeile, Nummern, Unkenntlich-Machen und Schmuckrahmen nur einen Klick entfernt."),
+      h("p", { class: "lead" }, "Ein modernes Paint für Mac und Windows. Soll ein Bild weitergegeben werden, sind Pfeile, Nummern, Verpixeln und Schmuckrahmen nur einen Klick entfernt."),
       h("div", { class: "empty-label" }, "Neue Leinwand"),
       h(
         "div",
@@ -433,7 +433,7 @@ function buildEmpty(newDialog: (preset?: [number, number]) => void) {
         "div",
         { class: "empty-actions" },
         h("button", { class: "ghost", onclick: () => void openFiles() }, icon("FolderOpen", 17), "Bild öffnen", h("span", { class: "kbds" }, k(MOD), k("O"))),
-        h("button", { class: "ghost", onclick: () => runCommand("paste") }, icon("ClipboardPaste", 17), "Aus Zwischenablage einfügen", h("span", { class: "kbds" }, k(MOD), k("V"))),
+        h("button", { class: "ghost", onclick: () => runCommand("paste") }, icon("ClipboardPaste", 17), "Aus der Zwischenablage einfügen", h("span", { class: "kbds" }, k(MOD), k("V"))),
       ),
       h("div", { class: "empty-foot" }, "Bilder lassen sich auch einfach hierher ziehen", h("span", { class: "dim" }, "·"), "Alle Befehle:", h("span", { class: "kbds" }, k(MOD), k("K"))),
       h("div", { class: "empty-credit" }, "Klecks von", h("button", { class: "link", onclick: () => void openUrl(WEBSITE) }, "Wolfgang Linz")),
@@ -450,7 +450,7 @@ export function buildChrome(app: HTMLElement, opts: { menu: () => void; newDialo
   const view = h("canvas", { class: "view" });
   const editor = h("textarea", { class: "text-editor", spellcheck: false, autocomplete: "off" });
   const empty = buildEmpty(opts.newDialog);
-  const drop = h("div", { class: "drop" }, h("div", { class: "drop-card" }, icon("ImageDown", 36, 1.6), h("b", {}, "Loslassen zum Öffnen"), h("small", {}, "Jedes Bild wird ein eigener Tab")));
+  const drop = h("div", { class: "drop" }, h("div", { class: "drop-card" }, icon("ImageDown", 36, 1.6), h("b", {}, "Loslassen zum Öffnen"), h("small", {}, "Jedes Bild öffnet sich in einem eigenen Tab")));
   stage.append(view, editor, buildDock(), ...buildBottom(), empty, drop);
   app.append(top, stage);
 

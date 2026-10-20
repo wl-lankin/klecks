@@ -36,7 +36,7 @@
 
 ## Extras für die Weitergabe
 
-- **Schwung-Pfeile**: Am mittleren Griff ziehst du sie in einen Bogen. Dazu klassische, offene und Doppelpfeile.
+- **Schwungpfeile**: Am mittleren Griff ziehst du sie in einen Bogen. Dazu klassische, offene und Doppelpfeile.
 - **Nummern** für Schritt-für-Schritt-Anleitungen. Jeder Klick setzt die nächste Zahl.
 - **Textmarker**, der wie ein echter Leuchtstift über Text liegt.
 - **Unkenntlich machen**: Namen, E-Mail-Adressen oder Passwörter verpixeln oder weichzeichnen.
@@ -44,7 +44,7 @@
 - **Schmuckrahmen**: Farbverlauf, Rand, abgerundete Ecken und Schatten, als Vorschau direkt im Bild.
 - **Kopieren** (⇧⌘C bzw. Strg+Shift+C oder der Knopf oben rechts) legt das fertige Bild in die Zwischenablage. Von dort fügst du es direkt in Chat, Mail oder Ticket ein, ganz ohne Speichern.
 
-Klecks liest die Zwischenablage nur, wenn du selbst einfügst, und beim Anlegen einer neuen Leinwand nur deren Maße. Es läuft nichts im Hintergrund mit.
+Klecks liest die Zwischenablage nur, wenn du selbst einfügst. Beim Anlegen einer neuen Leinwand fragt es lediglich die Maße eines dort liegenden Bildes ab. Im Hintergrund liest Klecks nie mit.
 
 ## Bedienung
 
@@ -58,13 +58,13 @@ Klecks liest die Zwischenablage nur, wenn du selbst einfügst, und beim Anlegen 
 | Einpassen / Originalgröße | ⌘0 / ⌘1 | Strg+0 / Strg+1 |
 | Ansicht verschieben | Leertaste halten | Leertaste halten |
 
-Jedes Werkzeug hat einen eigenen Buchstaben, z. B. B für Pinsel, A für Pfeil, T für Text. Fährst du mit der Maus über ein Werkzeug, siehst du sein Kürzel. Beim Zeichnen rastet **Shift** Winkel und Proportionen ein, **Alt** zeichnet von der Mitte aus, **Alt+Ziehen** dupliziert und **+ / −** ändern die Werkzeuggröße.
+Jedes Werkzeug hat einen eigenen Buchstaben, z. B. B für Pinsel, A für Pfeil, T für Text. Fährst du mit der Maus über ein Werkzeug, siehst du sein Kürzel. Beim Zeichnen rastet **Shift** Winkel und Proportionen ein, **Alt** zeichnet von der Mitte aus, **Alt+Ziehen** dupliziert, und **+ / −** ändern die Werkzeuggröße.
 
-Helles und dunkles Design folgen dem System. Umschalten kannst du unter „Ansicht“ oder in der Befehlspalette.
+Das Design, hell oder dunkel, folgt dem System. Umschalten kannst du unter „Ansicht“ oder in der Befehlspalette.
 
 ## Installation
 
-**macOS** (Apple Silicon und Intel, ab macOS 12): DMG öffnen und Klecks in „Programme“ ziehen. Klecks ist noch nicht von Apple notarisiert. Beim ersten Start deshalb mit Rechtsklick auf Klecks und „Öffnen“ starten, oder unter Systemeinstellungen → Datenschutz & Sicherheit auf „Trotzdem öffnen“ klicken.
+**macOS** (Apple Silicon und Intel, ab macOS 12): DMG öffnen und Klecks in „Programme“ ziehen. Klecks ist noch nicht von Apple notarisiert. Beim ersten Start deshalb per Rechtsklick auf Klecks „Öffnen“ wählen oder unter Systemeinstellungen → Datenschutz & Sicherheit auf „Trotzdem öffnen“ klicken.
 
 **Windows** (10 und 11, 64 Bit): Installer starten. Solange der Installer nicht signiert ist, meldet sich SmartScreen. Klicke dann auf „Weitere Informationen“ und „Trotzdem ausführen“.
 

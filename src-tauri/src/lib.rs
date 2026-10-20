@@ -156,7 +156,7 @@ fn mac_menu(app: &tauri::App) -> tauri::Result<()> {
             &item("fit", "Ins Fenster einpassen", Some("CmdOrCtrl+0"))?,
             &item("actual", "Originalgröße", Some("CmdOrCtrl+1"))?,
             &sep()?,
-            &item("theme", "Hell/Dunkel wechseln", None)?,
+            &item("theme", "Helles oder dunkles Design", None)?,
             &sep()?,
             &PredefinedMenuItem::fullscreen(h, Some("Vollbild"))?,
         ],

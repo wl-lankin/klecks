@@ -5,7 +5,7 @@ Klecks aktualisiert sich selbst, ohne die Arbeit zu unterbrechen. Die installier
 - **macOS:** Das neue App-Bundle wird sofort eingesetzt und gilt ab dem nächsten Start. In der Titelleiste erscheint „Version X ist bereit · Neu starten“.
 - **Windows:** Der Installer wird bereitgehalten und läuft beim Beenden von Klecks (oder sofort per „Neu starten“).
 
-Ein Neustart fragt nach, wenn Bilder ungespeicherte Änderungen haben. Nach dem Update meldet Klecks einmal „Klecks wurde auf Version X aktualisiert“. Manuell: Befehlspalette, „Nach Updates suchen“.
+Haben Bilder ungespeicherte Änderungen, fragt Klecks vor dem Neustart nach. Nach dem Update meldet Klecks einmal „Klecks wurde auf Version X aktualisiert“. Von Hand prüfen: Menü „Klecks“ → „Nach Updates suchen …“ oder über die Befehlspalette.
 
 ## Aufbau
 
@@ -48,14 +48,14 @@ Feste Links für die Website:
 3. Committen und pushen, CI muss grün sein.
 4. Tag setzen und pushen:
    ```bash
-   git tag -a v0.2.0 -m "Klecks 0.2.0"
-   git push origin v0.2.0
+   git tag -a v1.1.0 -m "Klecks 1.1.0"
+   git push origin v1.1.0
    ```
-   Ein Tag mit Bindestrich (`v0.2.0-beta.1`) wird als Vorabversion markiert; die Version in den Dateien bleibt rein numerisch.
+   Ein Tag mit Bindestrich (`v1.1.0-beta.1`) wird als Vorabversion markiert; die Version in den Dateien bleibt rein numerisch.
 5. Lauf „Release“ unter Actions abwarten (macOS, danach Windows).
 6. Entwurf prüfen (Dateien siehe oben, `latest.json` mit `signature` und `url` je Plattform) und veröffentlichen:
    ```bash
-   gh release edit v0.2.0 --draft=false --latest
+   gh release edit v1.1.0 --draft=false --latest
    ```
    Erst dann sehen installierte Apps das Update.
 

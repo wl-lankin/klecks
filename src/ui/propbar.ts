@@ -69,7 +69,7 @@ function colorControl(key: Key, current: string) {
 }
 
 const ARROWS: { value: ArrowStyle; icon: string; title: string }[] = [
-  { value: "taper", icon: "taper", title: "Schwung-Pfeil" },
+  { value: "taper", icon: "taper", title: "Schwungpfeil" },
   { value: "classic", icon: "ArrowUpRight", title: "Klassischer Pfeil" },
   { value: "open", icon: "ChevronRight", title: "Offene Spitze" },
   { value: "double", icon: "MoveDiagonal", title: "Doppelpfeil" },
@@ -338,7 +338,7 @@ function sectionFor(key: Key, obj: Obj | null): (Node | null)[] {
       }));
       break;
     case "picker":
-      out.push(h("span", { class: "pb-hint" }, icon("Pipette", 15), "Klick nimmt die Farbe auf, Rechtsklick als zweite Farbe"));
+      out.push(h("span", { class: "pb-hint" }, icon("Pipette", 15), "Ein Klick übernimmt die Farbe, ein Rechtsklick übernimmt sie als zweite Farbe."));
       break;
     case "marquee":
       out.push(segmented<"r" | "l">([
@@ -358,7 +358,7 @@ function sectionFor(key: Key, obj: Obj | null): (Node | null)[] {
           iconButton("Contrast", "Farben umkehren", () => adjustMarquee("invert")),
           iconButton("Trash", "Leeren", () => clearMarquee(), { danger: true }),
         );
-      } else out.push(h("span", { class: "pb-hint" }, "Bereich aufziehen, dann verschieben, kopieren oder zuschneiden"));
+      } else out.push(h("span", { class: "pb-hint" }, "Bereich aufziehen, dann verschieben, kopieren oder zuschneiden."));
       break;
     case "crop":
       if (S.crop) {
@@ -398,10 +398,10 @@ function sectionFor(key: Key, obj: Obj | null): (Node | null)[] {
       );
       break;
     case "select":
-      out.push(h("span", { class: "pb-hint" }, icon("MousePointer2", 15), "Markierung anklicken, um sie zu bearbeiten. Ziehen wählt mehrere."));
+      out.push(h("span", { class: "pb-hint" }, icon("MousePointer2", 15), "Markierung anklicken, um sie zu bearbeiten. Ziehen wählt mehrere aus."));
       break;
     case "hand":
-      out.push(h("span", { class: "pb-hint" }, icon("Hand", 15), "Ziehen verschiebt die Ansicht. Tipp: Leertaste halten geht mit jedem Werkzeug."));
+      out.push(h("span", { class: "pb-hint" }, icon("Hand", 15), "Ziehen verschiebt die Ansicht. Tipp: Mit gedrückter Leertaste geht das mit jedem Werkzeug."));
       break;
   }
   return out;
