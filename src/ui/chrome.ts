@@ -1,4 +1,5 @@
 import logoSvg from "../../assets/app-icon.svg?raw";
+import markSvg from "../../assets/mark.svg?raw";
 import { S, emit, on, saveSettings, settings, type Doc } from "../state";
 import { TOOLS, COMMANDS, runCommand, swapColors, keyLabel, openFiles } from "../commands";
 import { begin, blankDoc, commit, closeDoc, copyImage, fitView, mutate, redo, saveDoc, switchTo, undo, zoomAt, zoomStep } from "../docs";
@@ -8,9 +9,10 @@ import { MOD, WEBSITE, isMac, isTauri, isWindows, openUrl } from "../io";
 import { h, icon, clear, kbd } from "./dom";
 import { colorPanel, closePopover, popover, slider } from "./controls";
 
-export function logo(size: number) {
+export function logo(size: number, markOnly = false) {
   const t = document.createElement("template");
-  t.innerHTML = logoSvg.replace("<svg ", `<svg class="logo" width="${size}" height="${size}" `);
+  // The mark is the motif without the app-icon tile, for large display on the start screen.
+  t.innerHTML = (markOnly ? markSvg : logoSvg).replace("<svg ", `<svg class="logo" width="${size}" height="${Math.round(markOnly ? size * 640 / 600 : size)}" `);
   // Gradient ids must stay unique when the logo appears more than once.
   const n = Math.random().toString(36).slice(2, 7);
   t.innerHTML = t.innerHTML.replace(/id="(\w+)"/g, `id="$1${n}"`).replace(/url\(#(\w+)\)/g, `url(#$1${n})`);
@@ -408,7 +410,7 @@ function buildEmpty(newDialog: (preset?: [number, number]) => void) {
     h(
       "div",
       { class: "empty-card" },
-      h("div", { class: "empty-logo" }, logo(84)),
+      h("div", { class: "empty-logo" }, logo(128, true)),
       h("h1", {}, "Malen, zeichnen, gestalten."),
       h("p", { class: "lead" }, "Ein modernes Malprogramm für Mac und Windows. Soll ein Bild weitergegeben werden, sind Pfeile, Nummern, Verpixeln und Schmuckrahmen nur einen Klick entfernt."),
       h("div", { class: "empty-label" }, "Neue Leinwand"),
