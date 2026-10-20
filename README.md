@@ -5,8 +5,8 @@
 <h1 align="center">Klecks</h1>
 
 <p align="center">
-  <b>Ein modernes Paint für macOS und Windows.</b><br>
-  Alles, was das klassische Paint kann, in einer zeitgemäßen Oberfläche.<br>
+  <b>Ein modernes Malprogramm für macOS und Windows.</b><br>
+  Alles, was man von einem klassischen Malprogramm erwartet, in einer zeitgemäßen Oberfläche.<br>
   Dazu die Extras, mit denen ein Bild in Sekunden bereit zur Weitergabe ist.
 </p>
 
@@ -25,11 +25,11 @@
 ## Malen und zeichnen
 
 - **Pinsel** in vier Varianten: rund, Kalligrafie, weicher Airbrush, Sprühdose. Mit Grafiktablett reagiert er auf Stiftdruck.
-- **Stift** mit harten Pixeln wie im klassischen Paint, **Radierer**, **Fülleimer** mit einstellbarer Toleranz, **Pipette**.
+- **Stift** mit harten Pixeln wie in klassischen Malprogrammen, **Radierer**, **Fülleimer** mit einstellbarer Toleranz, **Pipette**.
 - **Zwei Farben**: Linksklick malt mit der ersten, Rechtsklick mit der zweiten. Palette, zuletzt benutzte Farben, Hex-Eingabe und freie Farbwahl.
 - **Linien, Rechtecke, Ellipsen und Formen**: Dreieck, rechtwinkliges Dreieck, Raute, Fünf- und Sechseck, Stern, Herz, Sprechblase, Blockpfeil, Haken, Kreuz. Formen bleiben Objekte. Du kannst sie jederzeit verschieben, skalieren, umfärben, füllen, stricheln und mit Schatten versehen.
 - **Text** in vier Schriften (Inter, Handschrift, Serif, Mono), frei, auf farbigem Etikett oder mit Kontur, die auf jedem Hintergrund lesbar bleibt.
-- **Auswählen**: Rechteck oder Lasso, Bereich herausheben und verschieben, kopieren, ausschneiden, leeren, zuschneiden. ⌘A bzw. Strg+A wählt wie in Paint das ganze Bild.
+- **Auswählen**: Rechteck oder Lasso, Bereich herausheben und verschieben, kopieren, ausschneiden, leeren, zuschneiden. ⌘A bzw. Strg+A wählt das ganze Bild samt Markierungen.
 - **Bild bearbeiten**: zuschneiden (frei, 1:1, 16:9, 4:3), Bildgröße, Zeichenfläche mit Anker, drehen, spiegeln, Farben umkehren, Graustufen.
 - **Dateien**: Öffnen per Dialog oder Drag & Drop. Speichern als PNG, JPEG, WebP oder BMP. Mehrere Bilder öffnest du als Tabs mit Vorschaubild.
 - **Neue Leinwand** in gängigen Größen. Liegt ein Bild in der Zwischenablage, schlägt Klecks dessen Maße vor.

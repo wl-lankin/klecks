@@ -341,7 +341,7 @@ export async function aboutDialog() {
     logo(96),
     h("h2", {}, "Klecks"),
     h("div", { class: "dim" }, `Version ${version}`),
-    h("p", {}, "Ein modernes Paint für Mac und Windows, mit Extras für die schnelle Weitergabe."),
+    h("p", {}, "Ein modernes Malprogramm für Mac und Windows, mit Extras für die schnelle Weitergabe."),
     h("div", { class: "creator" },
       h("span", { class: "dim" }, "Entwickelt von"),
       h("button", { class: "link", onclick: () => void openUrl(WEBSITE) }, "Wolfgang Linz"),

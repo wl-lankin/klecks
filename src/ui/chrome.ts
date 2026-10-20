@@ -410,7 +410,7 @@ function buildEmpty(newDialog: (preset?: [number, number]) => void) {
       { class: "empty-card" },
       h("div", { class: "empty-logo" }, logo(84)),
       h("h1", {}, "Malen, zeichnen, gestalten."),
-      h("p", { class: "lead" }, "Ein modernes Paint für Mac und Windows. Soll ein Bild weitergegeben werden, sind Pfeile, Nummern, Verpixeln und Schmuckrahmen nur einen Klick entfernt."),
+      h("p", { class: "lead" }, "Ein modernes Malprogramm für Mac und Windows. Soll ein Bild weitergegeben werden, sind Pfeile, Nummern, Verpixeln und Schmuckrahmen nur einen Klick entfernt."),
       h("div", { class: "empty-label" }, "Neue Leinwand"),
       h(
         "div",

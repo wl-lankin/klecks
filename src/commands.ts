@@ -25,7 +25,7 @@ export const TOOLS: { id: ToolId; title: string; icon: string; key: string; grou
   { id: "marquee", title: "Bereich auswählen", icon: "SquareDashed", key: "M", group: 0, hint: "Bereich aufziehen · Hineinklicken und ziehen verschiebt ihn · Entf leert ihn" },
   { id: "crop", title: "Zuschneiden", icon: "Crop", key: "C", group: 0, hint: "Rahmen anpassen · Enter oder Doppelklick schneidet zu · Esc bricht ab" },
   { id: "brush", title: "Pinsel", icon: "Brush", key: "B", group: 1, hint: "Ziehen malt · Rechtsklick malt mit der zweiten Farbe · Der Stiftdruck eines Grafiktabletts wird erkannt" },
-  { id: "pencil", title: "Stift", icon: "Pencil", key: "P", group: 1, hint: "Harte Pixel wie im klassischen Paint · Mit Shift entstehen gerade Linien" },
+  { id: "pencil", title: "Stift", icon: "Pencil", key: "P", group: 1, hint: "Harte Pixel wie in klassischen Malprogrammen · Mit Shift entstehen gerade Linien" },
   { id: "eraser", title: "Radierer", icon: "Eraser", key: "E", group: 1, hint: "Radiert Pixel bis zur Transparenz · Markierungen löschst du mit Entf" },
   { id: "fill", title: "Füllen", icon: "PaintBucket", key: "K", group: 1, hint: "Ein Klick füllt die Fläche · Ein Klick in eine Form füllt die Form" },
   { id: "picker", title: "Farbe aufnehmen", icon: "Pipette", key: "I", group: 1, hint: "Ein Klick übernimmt die Farbe · Ein Rechtsklick übernimmt sie als zweite Farbe" },
