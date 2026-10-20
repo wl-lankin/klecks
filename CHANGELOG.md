@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Klecks heißt in der Oberfläche jetzt durchgehend „Malprogramm“ statt „Paint“: auf dem Startbildschirm, im Über-Dialog und in den Werkzeughinweisen
+
 ## 1.0.0
 
 Die erste Version von Klecks, dem modernen Malprogramm für Mac und Windows.
