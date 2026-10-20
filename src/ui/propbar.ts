@@ -457,7 +457,10 @@ export function refresh(force = false) {
   bar.classList.remove("hidden");
   const keys = [...new Set(sel.map(keyFor))];
   let content: (Node | null)[];
-  if (sel.length && keys.length === 1) {
+  if (S.marquee) {
+    content = sectionFor("marquee", null);
+    if (sel.length) content.push(sep(), h("span", { class: "pb-chip" }, icon("Boxes", 14), `inkl. ${sel.length} ${sel.length === 1 ? "Markierung" : "Markierungen"}`));
+  } else if (sel.length && keys.length === 1) {
     content = sectionFor(keys[0], sel[0]);
     if (keys[0] === "image") content = [h("span", { class: "pb-chip" }, icon("Image", 14), "Bild"), sep(), ...content];
     content.push(...selectionActions());

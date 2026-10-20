@@ -264,7 +264,8 @@ export async function copyMarquee(cut = false) {
   const d = S.doc;
   const m = S.marquee;
   if (!d || !m) return;
-  const c = marqueePixels(d);
+  if (!cut && marqueeIsWholeDoc(d)) return copyImage();
+  const c = marqueePixels(d, true);
   if (!c) return;
   objectClip = null;
   await copyCanvas(c);
@@ -364,15 +365,11 @@ export function reorder(where: "front" | "back" | "up" | "down") {
 export function selectAll() {
   const d = S.doc;
   if (!d) return;
-  if (S.tool === "marquee" || !d.objects.length) {
-    S.marquee = { kind: "rect", r: { x: 0, y: 0, w: d.w, h: d.h } };
-    setTool("marquee", true);
-    requestRender();
-    emit("marquee");
-    return;
-  }
-  setTool("select");
-  setSelection(d.objects.map((o) => o.id));
+  // Like Paint: the whole picture, annotations included.
+  setTool("marquee");
+  S.marquee = { kind: "rect", r: { x: 0, y: 0, w: d.w, h: d.h } };
+  S.selection = d.objects.map((o) => o.id);
+  emit("marquee", "selection");
   requestRender();
 }
 
@@ -399,12 +396,18 @@ function marqueeRect(d: Doc): Rect | null {
   return x2 > x && y2 > y ? { x, y, w: x2 - x, h: y2 - y } : null;
 }
 
-function marqueePixels(d: Doc): HTMLCanvasElement | null {
+function marqueeIsWholeDoc(d: Doc) {
+  const r = marqueeRect(d);
+  return S.marquee?.kind === "rect" && !!r && r.x === 0 && r.y === 0 && r.w === d.w && r.h === d.h;
+}
+
+/** visible: what the user sees, annotations included; otherwise only the painted pixels. */
+function marqueePixels(d: Doc, visible = false): HTMLCanvasElement | null {
   const r = marqueeRect(d);
   if (!r) return null;
   const c = newCanvas(r.w, r.h);
   const ctx = c.getContext("2d")!;
-  ctx.drawImage(d.raster, -r.x, -r.y);
+  ctx.drawImage(visible ? exportCanvas(d, { frame: false }) : d.raster, -r.x, -r.y);
   if (S.marquee?.kind === "lasso") {
     ctx.globalCompositeOperation = "destination-in";
     ctx.fill(lassoPath(S.marquee.pts, r.x, r.y));
@@ -428,7 +431,12 @@ function clearRegion(tx: Tx, d: Doc) {
 
 export function clearMarquee() {
   if (!S.marquee) return;
-  mutate("Auswahl löschen", (tx, doc) => clearRegion(tx, doc));
+  mutate("Auswahl löschen", (tx, doc) => {
+    clearRegion(tx, doc);
+    // Annotations chosen together with the area (Select All) go as well.
+    doc.objects = doc.objects.filter((o) => !S.selection.includes(o.id));
+  });
+  setSelection([]);
 }
 
 /** Cuts the selected pixels out into a movable image object. */
