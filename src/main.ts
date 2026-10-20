@@ -4,7 +4,7 @@ import "./styles.css";
 import { S, emit, on, saveSettings, settings, uid } from "./state";
 import { initView, requestRender } from "./render";
 import { initTools, setTool, updateCursor, isDragging, layoutEditor } from "./tools";
-import { bindUi, findCommandFor, registerPaste } from "./commands";
+import { bindUi, findCommandFor, registerPaste, runCommand } from "./commands";
 import { createDoc, fitView, mutate, nudge, pasteCanvas } from "./docs";
 import { canvasFromBlob, isMac, isTauri, readClipboardImage } from "./io";
 import { buildChrome, setUpdateState, toggleFrame } from "./ui/chrome";
@@ -236,6 +236,32 @@ window.addEventListener("blur", () => {
   S.spaceDown = false;
 });
 
+// ---------- native menu (macOS) ----------
+
+// Copy and cut stay native menu items so text fields keep working; outside of them they are ours.
+for (const ev of ["copy", "cut"] as const) {
+  document.addEventListener(ev, (e) => {
+    if (isField(document.activeElement) || modalOpen() || !S.doc) return;
+    e.preventDefault();
+    runCommand(ev);
+  });
+}
+
+async function initMenu() {
+  if (!isTauri || !isMac) return;
+  const { listen } = await import("@tauri-apps/api/event");
+  const inField: Record<string, string> = { undo: "undo", redo: "redo", selectAll: "selectAll" };
+  await listen<string>("menu", (e) => {
+    const id = e.payload;
+    if (isField(document.activeElement) && inField[id]) {
+      document.execCommand(inField[id]);
+      return;
+    }
+    if (modalOpen() && id !== "palette") return;
+    runCommand(id);
+  });
+}
+
 // ---------- drag and drop ----------
 
 let dragDepth = 0;
@@ -298,6 +324,7 @@ async function initClose() {
 
 void initUpdates();
 void initClose();
+void initMenu();
 emit("docs", "tool", "settings");
 setTool("select");
 requestRender();

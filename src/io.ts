@@ -7,6 +7,17 @@ export const isMac = /Mac/.test(navigator.userAgent);
 export const isWindows = /Windows/.test(navigator.userAgent);
 export const MOD = isMac ? "⌘" : "Strg";
 
+export const WEBSITE = "https://wolfgang-linz.de";
+
+export async function openUrl(url: string) {
+  if (!isTauri) {
+    window.open(url, "_blank", "noopener");
+    return;
+  }
+  const { openUrl: open } = await import("@tauri-apps/plugin-opener");
+  await open(url);
+}
+
 export const IMAGE_EXT = ["png", "jpg", "jpeg", "webp", "bmp", "gif", "avif", "ico", "tif", "tiff", "heic"];
 
 export async function canvasFromBlob(blob: Blob): Promise<HTMLCanvasElement> {

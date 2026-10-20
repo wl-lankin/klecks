@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0
+## 1.0.0
 
 Erste Version von Klecks, dem modernen Paint für Mac und Windows.
 

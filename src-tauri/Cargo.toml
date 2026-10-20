@@ -1,6 +1,6 @@
 [package]
 name = "klecks"
-version = "0.1.0"
+version = "1.0.0"
 description = "Klecks - modern paint and screenshot markup"
 edition = "2021"
 license = "MIT"
@@ -16,6 +16,7 @@ tauri-build = { version = "2", features = [] }
 tauri = { version = "2", features = [] }
 tauri-plugin-dialog = "2"
 tauri-plugin-updater = "2"
+tauri-plugin-opener = "2"
 tokio = { version = "1", features = ["time"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"

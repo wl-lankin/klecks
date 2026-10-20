@@ -5,6 +5,7 @@ import { h, icon, kbd, clear } from "./dom";
 import { modal } from "./modal";
 import { popover, closePopover } from "./controls";
 import { logo } from "./chrome";
+import { WEBSITE, openUrl } from "../io";
 
 const firstKey = (c: Command) => (c.keys?.[0] ? kbd(...keyLabel(c.keys[0])) : null);
 
@@ -106,7 +107,6 @@ export function openPalette() {
 // ---------- main menu ----------
 
 export function openMenu(anchor: HTMLElement) {
-  const groups: Command["group"][] = ["Datei", "Bearbeiten", "Bild", "Objekt", "Ansicht", "Hilfe"];
   const col = (g: Command["group"]) =>
     h(
       "div",
@@ -140,7 +140,6 @@ export function openMenu(anchor: HTMLElement) {
     ),
     { align: "start" },
   );
-  void groups;
 }
 
 // ---------- forms ----------
@@ -311,7 +310,7 @@ export function shortcutsDialog() {
 }
 
 export async function aboutDialog() {
-  let version = "0.1.0";
+  let version = "1.0.0";
   try {
     const { getVersion } = await import("@tauri-apps/api/app");
     version = await getVersion();
@@ -321,11 +320,11 @@ export async function aboutDialog() {
     h("h2", {}, "Klecks"),
     h("div", { class: "dim" }, `Version ${version}`),
     h("p", {}, "Modernes Paint und Screenshot-Markierung für Mac und Windows."),
-    h("p", { class: "dim small" }, "Von Wolfgang Linz · wolfgang-linz.de"),
+    h("div", { class: "creator" },
+      h("span", { class: "dim" }, "Entwickelt von"),
+      h("button", { class: "link", onclick: () => void openUrl(WEBSITE) }, "Wolfgang Linz"),
+    ),
+    h("button", { class: "link small", onclick: () => void openUrl(WEBSITE) }, icon("Globe", 13), "wolfgang-linz.de"),
+    h("button", { class: "link small dim", onclick: () => void openUrl("https://github.com/wl-lankin/klecks") }, icon("Code", 13), "Quellcode auf GitHub"),
   ), { width: 360 }).el.classList.add("about-modal");
 }
-
-export function popMenuAt(anchor: HTMLElement) {
-  openMenu(anchor);
-}
-export { popover };

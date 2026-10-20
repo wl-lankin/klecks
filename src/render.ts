@@ -196,7 +196,7 @@ export function exportCanvas(doc: Doc, opts: { frame?: boolean; flattenAlpha?: s
 
 // ---------- view ----------
 
-export const ACCENT = "#8B6CFF";
+export const ACCENT = "#ff4d7e";
 
 export function toScreen(doc: Doc, x: number, y: number): [number, number] {
   return [x * doc.view.zoom + doc.view.panX, y * doc.view.zoom + doc.view.panY];
@@ -383,7 +383,7 @@ function drawOverlays(ctx: CanvasRenderingContext2D, doc: Doc) {
     const o = doc.objects.find((x) => x.id === S.hover);
     if (o) {
       const r = screenRect(doc, bounds(o));
-      ctx.strokeStyle = "rgba(139,108,255,0.75)";
+      ctx.strokeStyle = "rgba(255, 77, 126,0.75)";
       ctx.lineWidth = 1.5;
       ctx.strokeRect(r.x - 2, r.y - 2, r.w + 4, r.h + 4);
     }
@@ -418,8 +418,8 @@ function drawOverlays(ctx: CanvasRenderingContext2D, doc: Doc) {
   // rubber band
   if (overlay.band) {
     const r = screenRect(doc, normRect(overlay.band.x, overlay.band.y, overlay.band.w, overlay.band.h));
-    ctx.fillStyle = "rgba(139,108,255,0.10)";
-    ctx.strokeStyle = "rgba(139,108,255,0.9)";
+    ctx.fillStyle = "rgba(255, 77, 126,0.10)";
+    ctx.strokeStyle = "rgba(255, 77, 126,0.9)";
     ctx.lineWidth = 1;
     ctx.fillRect(r.x, r.y, r.w, r.h);
     ctx.strokeRect(r.x + 0.5, r.y + 0.5, r.w, r.h);

@@ -12,9 +12,9 @@
   --fg-faint: #6c6c79;
   --hover: rgba(255, 255, 255, 0.06);
   --press: rgba(255, 255, 255, 0.1);
-  --accent: #8b6cff;
-  --accent-soft: rgba(139, 108, 255, 0.18);
-  --accent-fg: #c4b5ff;
+  --accent: #ff4d7e;
+  --accent-soft: rgba(255, 77, 126, 0.18);
+  --accent-fg: #ff8fb1;
   --pink: #ff4d8d;
   --danger: #ff5a5f;
   --ok: #34d399;
@@ -43,8 +43,8 @@
     --fg-faint: #9a9aa6;
     --hover: rgba(16, 16, 30, 0.05);
     --press: rgba(16, 16, 30, 0.09);
-    --accent-soft: rgba(139, 108, 255, 0.14);
-    --accent-fg: #6a4cf0;
+    --accent-soft: rgba(255, 77, 126, 0.14);
+    --accent-fg: #d81b5c;
     --shadow: 0 12px 32px rgba(30, 30, 60, 0.12), 0 2px 6px rgba(30, 30, 60, 0.08);
     --shadow-lg: 0 30px 80px rgba(30, 30, 60, 0.2), 0 8px 24px rgba(30, 30, 60, 0.1);
     --inner: inset 0 1px 0 rgba(255, 255, 255, 0.7);
@@ -66,8 +66,8 @@
   --fg-faint: #9a9aa6;
   --hover: rgba(16, 16, 30, 0.05);
   --press: rgba(16, 16, 30, 0.09);
-  --accent-soft: rgba(139, 108, 255, 0.14);
-  --accent-fg: #6a4cf0;
+  --accent-soft: rgba(255, 77, 126, 0.14);
+  --accent-fg: #d81b5c;
   --shadow: 0 12px 32px rgba(30, 30, 60, 0.12), 0 2px 6px rgba(30, 30, 60, 0.08);
   --shadow-lg: 0 30px 80px rgba(30, 30, 60, 0.2), 0 8px 24px rgba(30, 30, 60, 0.1);
   --inner: inset 0 1px 0 rgba(255, 255, 255, 0.7);
@@ -629,8 +629,8 @@ kbd {
 
 .tool.on {
   color: #fff;
-  background: var(--accent);
-  box-shadow: 0 4px 14px rgba(139, 108, 255, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  background: var(--grad);
+  box-shadow: 0 4px 14px rgba(255, 77, 126, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .dock-colors {
@@ -1195,7 +1195,7 @@ kbd {
   place-items: center;
   border-radius: 22px;
   border: 2px dashed var(--accent);
-  background: rgba(139, 108, 255, 0.12);
+  background: rgba(255, 77, 126, 0.12);
   backdrop-filter: blur(6px);
   opacity: 0;
   pointer-events: none;
@@ -1415,7 +1415,7 @@ kbd {
 
 .menu-cols {
   display: grid;
-  grid-template-columns: repeat(3, 250px);
+  grid-template-columns: repeat(3, minmax(260px, auto));
   gap: 4px;
 }
 
@@ -1443,17 +1443,16 @@ kbd {
   text-align: left;
   color: var(--fg);
   font-weight: 500;
+  white-space: nowrap;
+}
+
+.menu-item > span:nth-child(2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .menu-item:hover:not(:disabled) {
-  background: var(--accent);
-  color: #fff;
-}
-
-.menu-item:hover:not(:disabled) kbd {
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff;
-  border-color: transparent;
+  background: var(--accent-soft);
 }
 
 .menu-item:disabled {
@@ -1465,7 +1464,7 @@ kbd {
 }
 
 .menu-item:hover:not(:disabled) .pal-ico {
-  color: #fff;
+  color: var(--accent-fg);
 }
 
 .menu-foot {
@@ -1880,6 +1879,7 @@ kbd {
 
 .pal-item {
   width: 100%;
+  white-space: nowrap;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1934,4 +1934,44 @@ kbd {
 
 .no-doc .tb-actions {
   visibility: hidden;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--accent-fg);
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.link.small {
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.link.dim {
+  color: var(--fg-faint);
+  font-weight: 500;
+}
+
+.creator {
+  display: flex;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.empty-credit {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  color: var(--fg-faint);
+  font-size: 12px;
 }
