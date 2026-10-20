@@ -124,10 +124,10 @@ export async function closeDoc(doc: Doc | null = S.doc) {
   if (!doc) return;
   if (doc.dirty) {
     switchTo(doc);
-    const r = await choose("Ungesicherte Änderungen", `„${doc.name}“ wurde geändert und weder gesichert noch kopiert.`, [
+    const r = await choose("Ungespeicherte Änderungen", `„${doc.name}“ wurde geändert und weder gespeichert noch kopiert.`, [
       { id: "cancel", label: "Abbrechen" },
       { id: "discard", label: "Verwerfen", danger: true },
-      { id: "save", label: "Sichern …", primary: true },
+      { id: "save", label: "Speichern", primary: true },
     ]);
     if (r === "cancel" || r === null) return;
     if (r === "save" && !(await saveDoc(doc, false))) return;
@@ -306,10 +306,10 @@ export async function saveDoc(doc = S.doc, reuse = true): Promise<boolean> {
     doc.name = basename(path);
     doc.dirty = false;
     emit("docs");
-    toast(`Gesichert: ${basename(path)}`, { icon: "Check", tone: "ok" });
+    toast(`Gespeichert: ${basename(path)}`, { icon: "Check", tone: "ok" });
     return true;
   } catch (e) {
-    toast(`Sichern fehlgeschlagen: ${e}`, { tone: "err" });
+    toast(`Speichern fehlgeschlagen: ${e}`, { tone: "err" });
     return false;
   }
 }

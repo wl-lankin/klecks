@@ -259,7 +259,7 @@ function buildTopbar(menu: () => void) {
     redoBtn,
     h("div", { class: "tb-sep" }),
     frameBtn,
-    h("button", { class: "ibtn with-text", "data-tip": "Als Datei sichern", "data-keys": keysOf("save"), onclick: () => void saveDoc() }, icon("Download", 17), h("span", {}, "Sichern")),
+    h("button", { class: "ibtn with-text", "data-tip": "Als Datei speichern", "data-keys": keysOf("save"), onclick: () => void saveDoc() }, icon("Download", 17), h("span", {}, "Speichern")),
     h("button", { class: "btn primary copy-btn", "data-tip": "Fertiges Bild in die Zwischenablage, direkt einfügbar in Chat, Mail oder Ticket", "data-keys": keysOf("copyImage"), onclick: () => void copyImage() }, icon("Copy", 16, 2.2), h("span", {}, "Kopieren")),
   );
   const winControls = isWindows && isTauri

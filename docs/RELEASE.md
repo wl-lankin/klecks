@@ -5,7 +5,7 @@ Klecks aktualisiert sich selbst, ohne die Arbeit zu unterbrechen. Die installier
 - **macOS:** Das neue App-Bundle wird sofort eingesetzt und gilt ab dem nächsten Start. In der Titelleiste erscheint „Version X ist bereit · Neu starten“.
 - **Windows:** Der Installer wird bereitgehalten und läuft beim Beenden von Klecks (oder sofort per „Neu starten“).
 
-Ein Neustart fragt nach, wenn Bilder ungesicherte Änderungen haben. Nach dem Update meldet Klecks einmal „Klecks wurde auf Version X aktualisiert“. Manuell: Befehlspalette, „Nach Updates suchen“.
+Ein Neustart fragt nach, wenn Bilder ungespeicherte Änderungen haben. Nach dem Update meldet Klecks einmal „Klecks wurde auf Version X aktualisiert“. Manuell: Befehlspalette, „Nach Updates suchen“.
 
 ## Aufbau
 

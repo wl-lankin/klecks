@@ -60,7 +60,7 @@ let manualCheck = false;
 async function restartForUpdate() {
   const dirty = S.docs.filter((d) => d.dirty);
   if (dirty.length) {
-    const r = await choose("Neu starten?", `${dirty.length === 1 ? "Ein Bild hat" : `${dirty.length} Bilder haben`} ungesicherte Änderungen, die beim Neustart verloren gehen.`, [
+    const r = await choose("Neu starten?", `${dirty.length === 1 ? "Ein Bild hat" : `${dirty.length} Bilder haben`} ungespeicherte Änderungen, die beim Neustart verloren gehen.`, [
       { id: "cancel", label: "Abbrechen" },
       { id: "go", label: "Trotzdem neu starten", danger: true },
     ]);
@@ -307,9 +307,9 @@ async function initClose() {
     const dirty = S.docs.filter((d) => d.dirty);
     if (dirty.length) {
       event.preventDefault();
-      const r = await choose("Klecks beenden?", `${dirty.length === 1 ? `„${dirty[0].name}“ hat` : `${dirty.length} Bilder haben`} ungesicherte Änderungen.`, [
+      const r = await choose("Klecks beenden?", `${dirty.length === 1 ? `„${dirty[0].name}“ hat` : `${dirty.length} Bilder haben`} ungespeicherte Änderungen.`, [
         { id: "cancel", label: "Abbrechen" },
-        { id: "quit", label: "Ohne Sichern beenden", danger: true },
+        { id: "quit", label: "Ohne Speichern beenden", danger: true },
       ]);
       if (r !== "quit") return;
       await invoke("update_on_quit");
