@@ -3,6 +3,7 @@
 ## 1.1.1
 
 - Windows: Bildschirmausschnitte haben keine durchsichtige Linie am unteren Rand mehr
+- Windows: Das App-Icon füllt seine Fläche jetzt aus und ist so groß wie die Icons anderer Programme
 
 ## 1.1.0
 

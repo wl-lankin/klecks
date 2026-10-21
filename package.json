@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "tauri": "tauri",
-    "icons": "tauri icon assets/app-icon.svg",
+    "icons": "tauri icon assets/app-icon.svg && tauri icon assets/app-icon-windows.svg -o .icons-win && cp .icons-win/icon.ico .icons-win/Square*.png .icons-win/StoreLogo.png src-tauri/icons/ && rm -rf .icons-win src-tauri/icons/android src-tauri/icons/ios",
     "pack": "tauri build",
     "landing": "vite build --config vite.landing.config.ts"
   },

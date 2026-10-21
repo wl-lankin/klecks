@@ -89,7 +89,7 @@ npm run pack           # installierbare App bauen
 | `src/` | Oberfläche, Werkzeuge, Renderer, Verlauf (Undo/Redo als Pixel-Patches) |
 | `src/ui/` | Titelleiste, Werkzeugleiste, Eigenschaftsleiste, Dialoge, Befehlspalette |
 | `src-tauri/` | Rust: Dateien, Zwischenablage, native Menüleiste, Updater |
-| `assets/` | Logo als SVG; `npm run icons` erzeugt daraus alle App-Icons |
+| `assets/` | Logo als SVG (Mac-Icon mit Rand, Windows-Icon randlos, Bildmarke, Menüleisten-Symbol); `npm run icons` erzeugt daraus alle App-Icons |
 
 Wie Releases und automatische Updates funktionieren, steht in [docs/RELEASE.md](docs/RELEASE.md).
 
