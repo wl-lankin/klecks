@@ -98,6 +98,25 @@ button {
   background: none;
   border: 0;
   padding: 0;
+  cursor: pointer;
+}
+
+a,
+.tab,
+.switch,
+.fm-switch,
+.check,
+.check input,
+.native-wrap,
+.native,
+input[type="range"],
+input[type="checkbox"],
+[role="button"] {
+  cursor: pointer;
+}
+
+button:disabled,
+.menu-item:disabled {
   cursor: default;
 }
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2
+
+- Knöpfe, Links, Tabs, Farbfelder, Schalter und Regler zeigen beim Drüberfahren die Hand als Mauszeiger
+
 ## 1.1.1
 
 - Windows: Bildschirmausschnitte haben keine durchsichtige Linie am unteren Rand mehr
