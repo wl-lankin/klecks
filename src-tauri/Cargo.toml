@@ -1,6 +1,6 @@
 [package]
 name = "klecks"
-version = "1.0.2"
+version = "1.1.0"
 description = "Klecks - modern paint and screenshot markup"
 edition = "2021"
 license = "MIT"
