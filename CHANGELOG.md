@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- Windows: Bildschirmausschnitte haben keine durchsichtige Linie am unteren Rand mehr
+
 ## 1.1.0
 
 - Neu: Bildschirmausschnitt mit ⌃⇧⌘K (Mac) bzw. Win+Shift+K (Windows). Bereich aufziehen, der Ausschnitt öffnet sich direkt in Klecks

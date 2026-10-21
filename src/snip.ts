@@ -80,12 +80,13 @@ async function finish() {
   const W = window.innerWidth;
   const s = shot.width / W;
   const area = r && r.w >= 3 && r.h >= 3 ? r : { x: 0, y: 0, w: W, h: window.innerHeight };
-  await invoke("snip_finish", {
-    x: Math.round(area.x * s),
-    y: Math.round(area.y * s),
-    width: Math.max(1, Math.round(area.w * s)),
-    height: Math.max(1, Math.round(area.h * s)),
-  });
+  // Edges are rounded separately, and a frame reaching the window edge takes the last pixel row too.
+  const sy = shot.height / window.innerHeight;
+  const x1 = Math.round(area.x * s);
+  const y1 = Math.round(area.y * sy);
+  const x2 = area.x + area.w >= W - 1 ? shot.width : Math.round((area.x + area.w) * s);
+  const y2 = area.y + area.h >= window.innerHeight - 1 ? shot.height : Math.round((area.y + area.h) * sy);
+  await invoke("snip_finish", { x: x1, y: y1, width: Math.max(1, x2 - x1), height: Math.max(1, y2 - y1) });
 }
 
 const cancel = () => void invoke("snip_cancel");

@@ -142,7 +142,11 @@ pub fn snip_finish(app: AppHandle, x: u32, y: u32, width: u32, height: u32) -> R
         let img = image::RgbaImage::from_raw(*w, *h, rgba.clone()).ok_or("bad shot")?;
         let x = x.min(w - 1);
         let y = y.min(h - 1);
-        let cut = image::imageops::crop_imm(&img, x, y, width.clamp(1, w - x), height.clamp(1, h - y)).to_image();
+        let mut cut = image::imageops::crop_imm(&img, x, y, width.clamp(1, w - x), height.clamp(1, h - y)).to_image();
+        // GDI captures do not fill the alpha channel reliably; a screen picture is always opaque.
+        for px in cut.pixels_mut() {
+            px.0[3] = 255;
+        }
         let mut png = Vec::new();
         cut.write_to(&mut std::io::Cursor::new(&mut png), image::ImageFormat::Png).map_err(|e| e.to_string())?;
         png
