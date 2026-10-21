@@ -1,8 +1,10 @@
+mod background;
 mod snip;
 mod updates;
 
 use std::borrow::Cow;
 use tauri::ipc::{InvokeBody, Request, Response};
+use tauri::Manager;
 
 fn header_path(request: &Request) -> Result<String, String> {
     let raw = request
@@ -95,7 +97,7 @@ fn mac_menu(app: &tauri::App) -> tauri::Result<()> {
             &PredefinedMenuItem::hide_others(h, Some("Andere ausblenden"))?,
             &PredefinedMenuItem::show_all(h, Some("Alle einblenden"))?,
             &sep()?,
-            &PredefinedMenuItem::quit(h, Some("Klecks beenden"))?,
+            &item("quit", "Klecks beenden", Some("CmdOrCtrl+Q"))?,
         ],
     )?;
     let file = sub(
@@ -201,6 +203,12 @@ fn register_snip_shortcut(app: &tauri::App) {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        // A second launch (Start menu, Finder) only brings the running Klecks forward.
+        .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| background::show_main(app)))
+        .plugin(tauri_plugin_autostart::init(
+            tauri_plugin_autostart::MacosLauncher::LaunchAgent,
+            Some(vec![background::BACKGROUND_ARG]),
+        ))
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_opener::init())
@@ -210,6 +218,14 @@ pub fn run() {
             #[cfg(target_os = "macos")]
             mac_menu(app)?;
             register_snip_shortcut(app);
+            background::init_autostart(app.handle());
+            background::build_tray(app.handle())?;
+            if background::started_in_background() {
+                #[cfg(target_os = "macos")]
+                app.set_activation_policy(tauri::ActivationPolicy::Accessory);
+            } else {
+                background::show_main(app.handle());
+            }
             if !cfg!(debug_assertions) {
                 updates::spawn(app.handle().clone());
             }
@@ -231,7 +247,27 @@ pub fn run() {
             updates::update_status,
             updates::update_restart,
             updates::update_on_quit,
+            background::autostart_enabled,
+            background::autostart_set,
+            background::show_window,
+            background::app_quit,
         ])
-        .run(tauri::generate_context!())
-        .expect("error while running Klecks");
+        // Closing the window only hides it; Klecks stays ready for the snipping shortcut.
+        .on_window_event(|window, event| {
+            if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+                if window.label() == "main" {
+                    api.prevent_close();
+                    background::hide_main(window.app_handle());
+                }
+            }
+        })
+        .build(tauri::generate_context!())
+        .expect("error while running Klecks")
+        .run(|_app, _event| {
+            // Clicking the Dock icon while the window is hidden opens it again.
+            #[cfg(target_os = "macos")]
+            if let tauri::RunEvent::Reopen { .. } = _event {
+                background::show_main(_app);
+            }
+        });
 }

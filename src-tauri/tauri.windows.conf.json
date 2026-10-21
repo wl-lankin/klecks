@@ -12,7 +12,8 @@
         "dragDropEnabled": false,
         "backgroundColor": "#0d0d11",
         "decorations": false,
-        "shadow": true
+        "shadow": true,
+        "visible": false
       }
     ]
   }

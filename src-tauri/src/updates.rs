@@ -122,6 +122,10 @@ pub fn spawn(app: AppHandle) {
 }
 
 /// Runs the pending Windows installer; it ends this process. False if there is nothing to install.
+pub fn install_pending_on_quit(app: &AppHandle) {
+    run_pending_installer(app);
+}
+
 fn run_pending_installer(app: &AppHandle) -> bool {
     let pending = app.state::<Updates>().pending.lock().unwrap().take();
     match pending {

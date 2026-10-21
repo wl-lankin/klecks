@@ -42,6 +42,7 @@
 - **Unkenntlich machen**: Namen, E-Mail-Adressen oder Passwörter verpixeln oder weichzeichnen.
 - **Spotlight**: Ein Bereich bleibt hell, der Rest wird abgedunkelt.
 - **Schmuckrahmen**: Farbverlauf, Rand, abgerundete Ecken und Schatten, als Vorschau direkt im Bild.
+- **Bildschirmausschnitt** mit **⌃⇧⌘K** (Mac) bzw. **Win+Shift+K** (Windows), auch ohne Klecks vorher zu öffnen: Bereich aufziehen, und der Ausschnitt liegt als neues Bild in Klecks. Auf dem Mac fragt macOS beim ersten Mal nach der Freigabe „Bildschirmaufnahme“.
 - **Kopieren** (⇧⌘C bzw. Strg+Shift+C oder der Knopf oben rechts) legt das fertige Bild in die Zwischenablage. Von dort fügst du es direkt in Chat, Mail oder Ticket ein, ganz ohne Speichern.
 
 Klecks liest die Zwischenablage nur, wenn du selbst einfügst. Beim Anlegen einer neuen Leinwand fragt es lediglich die Maße eines dort liegenden Bildes ab. Im Hintergrund liest Klecks nie mit.
@@ -67,6 +68,8 @@ Das Design, hell oder dunkel, folgt dem System. Umschalten kannst du unter „An
 **macOS** (Apple Silicon und Intel, ab macOS 12): DMG öffnen und Klecks in „Programme“ ziehen. Klecks ist noch nicht von Apple notarisiert. Beim ersten Start deshalb per Rechtsklick auf Klecks „Öffnen“ wählen oder unter Systemeinstellungen → Datenschutz & Sicherheit auf „Trotzdem öffnen“ klicken.
 
 **Windows** (10 und 11, 64 Bit): Installer starten. Solange der Installer nicht signiert ist, meldet sich SmartScreen. Klicke dann auf „Weitere Informationen“ und „Trotzdem ausführen“.
+
+**Im Hintergrund:** Klecks startet beim Anmelden unsichtbar, damit das Ausschnitt-Kürzel jederzeit funktioniert. Das Fenster zu schließen blendet Klecks nur aus. Über das Symbol in der Menüleiste (Mac) bzw. im Infobereich (Windows) öffnest du Klecks, nimmst einen Ausschnitt auf, schaltest „Beim Anmelden starten“ ab oder beendest Klecks.
 
 **Updates** kommen automatisch und unterbrechen nie deine Arbeit. Auf dem Mac gilt die neue Version ab dem nächsten Start, unter Windows wird sie beim Beenden installiert. Steht ein Update bereit, zeigt die Titelleiste „Neu starten“.
 

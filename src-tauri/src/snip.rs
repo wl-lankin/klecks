@@ -24,11 +24,7 @@ pub struct Snip {
 
 fn deliver(app: &AppHandle, png: Vec<u8>) {
     *app.state::<Snip>().result.lock().unwrap() = Some(png);
-    if let Some(w) = app.get_webview_window("main") {
-        let _ = w.unminimize();
-        let _ = w.show();
-        let _ = w.set_focus();
-    }
+    crate::background::show_main_soon(app);
     let _ = app.emit_to("main", "snip-ready", ());
 }
 

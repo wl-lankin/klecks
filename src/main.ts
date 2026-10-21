@@ -114,6 +114,8 @@ bindUi({
   checkUpdates: () => void checkUpdates(),
   about: () => void aboutDialog(),
   snip: () => void startSnip(),
+  quit: () => void quitApp(),
+  autostart: () => void toggleAutostart(),
 });
 
 // ---------- screen snipping ----------
@@ -324,34 +326,42 @@ window.addEventListener("drop", async (e) => {
   }
 });
 
-// ---------- closing ----------
+// ---------- quitting ----------
 
-async function initClose() {
+// Closing the window only hides it (Klecks stays ready for the snipping shortcut); quitting asks
+// about unsaved images first.
+async function quitApp() {
   if (!isTauri) return;
-  const { getCurrentWindow } = await import("@tauri-apps/api/window");
   const { invoke } = await import("@tauri-apps/api/core");
-  const win = getCurrentWindow();
-  await win.onCloseRequested(async (event) => {
-    const dirty = S.docs.filter((d) => d.dirty);
-    if (dirty.length) {
-      event.preventDefault();
-      const r = await choose("Klecks beenden?", `${dirty.length === 1 ? `„${dirty[0].name}“ hat` : `${dirty.length} Bilder haben`} ungespeicherte Änderungen.`, [
-        { id: "cancel", label: "Abbrechen" },
-        { id: "quit", label: "Ohne Speichern beenden", danger: true },
-      ]);
-      if (r !== "quit") return;
-      await invoke("update_on_quit");
-      await win.destroy();
-      return;
-    }
-    await invoke("update_on_quit");
-  });
+  const dirty = S.docs.filter((d) => d.dirty);
+  if (dirty.length) {
+    await invoke("show_window");
+    const r = await choose("Klecks beenden?", `${dirty.length === 1 ? `„${dirty[0].name}“ hat` : `${dirty.length} Bilder haben`} ungespeicherte Änderungen.`, [
+      { id: "cancel", label: "Abbrechen" },
+      { id: "quit", label: "Ohne Speichern beenden", danger: true },
+    ]);
+    if (r !== "quit") return;
+  }
+  await invoke("app_quit");
+}
+
+async function toggleAutostart() {
+  if (!isTauri) return toast("Autostart gibt es nur in der installierten App");
+  const { invoke } = await import("@tauri-apps/api/core");
+  const on = await invoke<boolean>("autostart_set", { on: !(await invoke<boolean>("autostart_enabled")) });
+  toast(on ? "Klecks startet beim Anmelden im Hintergrund" : "Klecks startet nicht mehr beim Anmelden", { icon: on ? "Check" : "Info", tone: on ? "ok" : "info" });
+}
+
+async function initQuit() {
+  if (!isTauri) return;
+  const { listen } = await import("@tauri-apps/api/event");
+  await listen("quit-request", () => void quitApp());
 }
 
 // ---------- start ----------
 
 void initUpdates();
-void initClose();
+void initQuit();
 void initMenu();
 void initSnip();
 emit("docs", "tool", "settings");

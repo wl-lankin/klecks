@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.0
+
+- Neu: Bildschirmausschnitt mit ⌃⇧⌘K (Mac) bzw. Win+Shift+K (Windows). Bereich aufziehen, der Ausschnitt öffnet sich direkt in Klecks
+- Klecks startet beim Anmelden unsichtbar im Hintergrund, damit das Kürzel immer funktioniert; abschaltbar über das Symbol in der Menüleiste bzw. im Infobereich
+- Fenster schließen blendet Klecks nur aus, offene Bilder bleiben erhalten; Beenden mit ⌘Q bzw. Strg+Q oder über das Symbol
+- Ein zweiter Start holt das laufende Klecks nach vorn, statt ein zweites zu öffnen
+- Objekte außerhalb der Leinwand bleiben in der Ansicht blass sichtbar und lassen sich zurückholen
+- Der Startbildschirm ist aufgeräumt, der Creator-Hinweis steht im Über-Dialog
+
 ## 1.0.2
 
 - Der Startbildschirm zeigt keinen Scrollbalken mehr und wird in niedrigen Fenstern kompakter

@@ -52,6 +52,8 @@ let ui: {
   checkUpdates: () => void;
   about: () => void;
   snip: () => void;
+  quit: () => void;
+  autostart: () => void;
 } = null!;
 
 export function bindUi(u: typeof ui) {
@@ -111,6 +113,8 @@ export const COMMANDS: Command[] = [
   { id: "palette", title: "Befehlspalette", group: "Hilfe", keys: ["mod+k", "mod+shift+p"], icon: "Command", run: () => ui.palette() },
   { id: "shortcuts", title: "Tastenkürzel", group: "Hilfe", keys: ["k:?", "f1"], icon: "Keyboard", run: () => ui.shortcuts() },
   { id: "updates", title: "Nach Updates suchen", group: "Hilfe", icon: "RefreshCcw", run: () => ui.checkUpdates() },
+  { id: "autostart", title: "Beim Anmelden starten ein/aus", group: "Hilfe", icon: "Power", run: () => ui.autostart() },
+  { id: "quit", title: "Klecks beenden", group: "Datei", keys: ["mod+q"], icon: "LogOut", run: () => ui.quit() },
   { id: "about", title: "Über Klecks", group: "Hilfe", icon: "Info", run: () => ui.about() },
   // Werkzeuge
   ...TOOLS.map((t) => ({ id: `tool.${t.id}`, title: t.title, group: "Werkzeug" as const, keys: [`key${t.key.toLowerCase()}`], icon: t.icon, run: () => setTool(t.id), when: hasDoc })),
