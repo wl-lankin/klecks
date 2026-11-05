@@ -8,6 +8,7 @@
 #
 # createUpdaterArtifacts lives in src-tauri/tauri.updater.conf.json and is only passed here, because
 # it makes `tauri build` demand the signing key and local builds have none.
+# The Windows installer and app are Authenticode-signed (docs/CODE-SIGNING.md).
 # The Windows job waits for the macOS job: both write the same latest.json, and parallel uploads race.
 
 name: Release
@@ -79,6 +80,14 @@ jobs:
   windows:
     needs: macos
     runs-on: windows-latest
+    # The Azure login for signing only trusts jobs in this environment.
+    environment: release
+    permissions:
+      contents: write
+      id-token: write # Windows signing logs in to Azure Artifact Signing through OIDC
+    env:
+      AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
     steps:
       - uses: actions/checkout@v4
 
@@ -105,6 +114,14 @@ jobs:
             echo 'NOTES_EOF'
           } >> "$GITHUB_OUTPUT"
 
+      # The app and the installer are signed inside tauri build, so the updater .sig files are made
+      # over the signed installer.
+      - name: Prepare code signing
+        id: signing
+        uses: ./.github/actions/windows-signing
+        with:
+          description: Klecks
+
       - uses: tauri-apps/tauri-action@v0.6.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -119,7 +136,7 @@ jobs:
           prerelease: ${{ contains(env.TAG, '-') }}
           uploadUpdaterJson: true
           updaterJsonPreferNsis: true
-          args: --bundles nsis --config src-tauri/tauri.updater.conf.json
+          args: --bundles nsis --config src-tauri/tauri.updater.conf.json --config ${{ steps.signing.outputs.config }}
 
       - name: Stable download name (Windows)
         shell: bash

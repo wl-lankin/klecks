@@ -62,4 +62,4 @@ Feste Links für die Website:
 ## Einschränkungen
 
 - TODO Apple-Notarisierung: Das DMG ist nicht signiert. Beim ersten Öffnen: Systemeinstellungen, Datenschutz und Sicherheit, „Trotzdem öffnen“, oder `xattr -dr com.apple.quarantine /Applications/Klecks.app`. Updates sind davon nicht betroffen.
-- TODO Windows-Signierung (Azure Artifact Signing, wie bei den anderen Apps): Bis dahin meldet sich SmartScreen beim ersten Start.
+- Windows ist signiert (Azure Artifact Signing, siehe `docs/CODE-SIGNING.md`). Solange das Zertifikat noch neu ist, kann sich SmartScreen beim ersten Start trotzdem melden.

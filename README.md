@@ -67,7 +67,7 @@ Das Design, hell oder dunkel, folgt dem System. Umschalten kannst du unter „An
 
 **macOS** (Apple Silicon und Intel, ab macOS 12): DMG öffnen und Klecks in „Programme“ ziehen. Klecks ist noch nicht von Apple notarisiert. Beim ersten Start deshalb per Rechtsklick auf Klecks „Öffnen“ wählen oder unter Systemeinstellungen → Datenschutz & Sicherheit auf „Trotzdem öffnen“ klicken.
 
-**Windows** (10 und 11, 64 Bit): Installer starten. Solange der Installer nicht signiert ist, meldet sich SmartScreen. Klicke dann auf „Weitere Informationen“ und „Trotzdem ausführen“.
+**Windows** (10 und 11, 64 Bit): Installer starten. Der Installer ist ab dem nächsten Release signiert („Wolfgang Linz“). Solange das Zertifikat noch neu ist, kann sich SmartScreen anfangs trotzdem noch einmal melden. Klicke dann auf „Weitere Informationen“ und „Trotzdem ausführen“.
 
 **Im Hintergrund:** Klecks startet beim Anmelden unsichtbar, damit das Ausschnitt-Kürzel jederzeit funktioniert. Das Fenster zu schließen blendet Klecks nur aus. Über das Symbol in der Menüleiste (Mac) bzw. im Infobereich (Windows) öffnest du Klecks, nimmst einen Ausschnitt auf, schaltest „Beim Anmelden starten“ ab oder beendest Klecks.
 
