@@ -56,7 +56,7 @@ jobs:
           $unpacked = Join-Path $env:RUNNER_TEMP 'installer'
           7z x $setup.FullName "-o$unpacked" -y | Out-Null
           $files = @($setup) + @(Get-ChildItem $unpacked -Recurse -Filter *.exe | Where-Object Name -notlike 'uninstall*')
-          if (-not ($files.Name -ccontains 'Klecks.exe')) { throw "App missing in the installer: $($files.Name -join ', ')" }
+          if (-not ($files.Name -ccontains 'klecks.exe')) { throw "App missing in the installer: $($files.Name -join ', ')" }
           $bad = 0
           foreach ($f in $files) {
             $s = Get-AuthenticodeSignature $f.FullName
