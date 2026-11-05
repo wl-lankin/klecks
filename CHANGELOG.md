@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3
+
+- Windows: Installer und App sind jetzt digital signiert (Herausgeber Wolfgang Linz). Windows warnt beim Installieren nicht mehr vor einem unbekannten Herausgeber
+
 ## 1.1.2
 
 - Knöpfe, Links, Tabs, Farbfelder, Schalter und Regler zeigen beim Drüberfahren die Hand als Mauszeiger
